@@ -1,37 +1,37 @@
 ---
 title: Home
 layout: home
+nav_order: 1
 ---
 
-Testing
+# Welcome to the Learning Mechanics DeCal!
+*Learning Mechanics* is the emerging discipline that treats deep learning the way physics treats the natural world: seeking compact mathematical principles, tight connections between theory and experiment, and simple, intuitive explanations for complex phenomena.
 
-This is a *bare-minimum* template to create a Jekyll site that uses the [Just the Docs] theme. You can easily set the created site to be published on [GitHub Pages] – the [README] file explains how to do that, along with other details.
+Deep learning is arguably one of the most powerful technologies humans have ever built. However, we have yet to build a comprehensive theory for how it works. The radical engineering success of deep learning has outpaced our scientific understanding of it, and the effort to close that gap may just constitute the founding of a genuinely new field of science, one whose implications for our understanding of intelligence, data, and learning extend far beyond the neural networks that motivated it. 
 
-If [Jekyll] is installed on your computer, you can also build and preview the created site *locally*. This lets you test changes before committing them, and avoids waiting for GitHub Pages.[^1] And you will be able to deploy your local build to a different platform than GitHub Pages.
+Drawing heavily from the whitepaper *There Will Be a Scientific Theory of Deep Learning (Simon et al., 2026)* and the primary literature it synthesizes, we will examine the theoretical tools, empirical regularities, and open questions that are laying the groundwork for a physics-like understanding of deep learning. The course is organized around five lines of evidence that a scientific theory is possible: 
+1. analytically solvable settings exist,
+2. insightful limits reveal fundamental behavior,
+3. simple equations capture meaningful macroscopic statistics,
+4. hyperparameters can be disentangled and understood, and
+5. universal phenomena appear across settings and tasks.
 
-More specifically, the created site:
+# Course Calendar
 
-- uses a gem-based approach, i.e. uses a `Gemfile` and loads the `just-the-docs` gem
-- uses the [GitHub Pages / Actions workflow] to build and publish the site on GitHub Pages
+Note: schedule is subject to change.
 
-Other than that, you're free to customize sites that you create with this template, however you like. You can easily change the versions of `just-the-docs` and Jekyll it uses, as well as adding further plugins.
+### Week 1
+(no class)
 
-[Browse our documentation][Just the Docs] to learn more about how to use this theme.
+### Week 2
+**Lecture 1**: Introduction to Learning Mechanics
+- Readings: Simon et al. (2026)
+- Lecture Notes:
+- Homework:
 
-To get started with creating a site, simply:
 
-1. click "[use this template]" to create a GitHub repository
-2. go to Settings > Pages > Build and deployment > Source, and select GitHub Actions
 
-If you want to maintain your docs in the `docs` directory of an existing project repo, see [Hosting your docs from an existing project repo](https://github.com/just-the-docs/just-the-docs-template/blob/main/README.md#hosting-your-docs-from-an-existing-project-repo) in the template README.
+# Q&A
+What is a *[DeCal](https://lsadvising.berkeley.edu/news/whats-deal-decals)*?
 
-----
 
-[^1]: [It can take up to 10 minutes for changes to your site to publish after you push the changes to GitHub](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/creating-a-github-pages-site-with-jekyll#creating-your-site).
-
-[Just the Docs]: https://just-the-docs.github.io/just-the-docs/
-[GitHub Pages]: https://docs.github.com/en/pages
-[README]: https://github.com/just-the-docs/just-the-docs-template/blob/main/README.md
-[Jekyll]: https://jekyllrb.com
-[GitHub Pages / Actions workflow]: https://github.blog/changelog/2022-07-27-github-pages-custom-github-actions-workflows-beta/
-[use this template]: https://github.com/just-the-docs/just-the-docs-template/generate

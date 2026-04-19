@@ -11,100 +11,257 @@ Deep learning is among the most powerful technologies humans have ever built, an
 
 Readings draw heavily from the whitepaper _There Will Be a Scientific Theory of Deep Learning_ (Simon et al., 2026) and the primary literature it synthesizes. We will work through the theoretical tools, empirical regularities, and open questions that are laying the groundwork for a physics-like understanding of deep learning.
 
-# Course Calendar
-Note: schedule is subject to change.
+<div class="course-calendar" markdown="0">
+  <div class="course-calendar__header">
+    <h2>Course Calendar</h2>
+    <p>Schedule is subject to change.</p>
+  </div>
 
-### Week 1 
-(First Week: No Class)
+  <div class="cal-timeline">
 
-### Week 2 
-**Lecture 1**. Introduction I: Learning Mechanics (potential guest lecture)
+    <!-- Week 1 ----------------------------------------------------------- -->
+    <div class="cal-week cal-week--off">
+      <div class="cal-week__marker"><span class="week-num">Wk 1</span></div>
+      <div class="cal-week__card">
+        <div class="cal-week__title">First Week &mdash; No Class</div>
+      </div>
+    </div>
 
-*What's the evidence for an emerging scientific theory of deep learning?*
-- Readings: Simon et al. (2026)
+    <!-- Week 2 ----------------------------------------------------------- -->
+    <div class="cal-week">
+      <div class="cal-week__marker"><span class="week-num">Wk 2</span></div>
+      <div class="cal-week__card">
+        <h3 class="cal-week__title">
+          <span class="lecture-num">Lecture 1</span>
+          Introduction I: Learning Mechanics
+        </h3>
+        <p class="cal-week__question">
+          What&rsquo;s the evidence for an emerging scientific theory of deep learning?
+        </p>
+        <div class="cal-week__resources">
+          <span class="cal-week__tag cal-week__tag--reading">Reading: Simon et al. (2026)</span>
+        </div>
+      </div>
+    </div>
 
-### Week 3 
-**Lecture 2**. Introduction II: Neural Networks
+    <!-- Week 3 ----------------------------------------------------------- -->
+    <div class="cal-week">
+      <div class="cal-week__marker"><span class="week-num">Wk 3</span></div>
+      <div class="cal-week__card">
+        <h3 class="cal-week__title">
+          <span class="lecture-num">Lecture 2</span>
+          Introduction II: Neural Networks
+        </h3>
+        <p class="cal-week__question">
+          What exactly are neural networks? Why are they hard to study? How will we study them anyways?
+        </p>
+        <div class="cal-week__resources">
+          <a class="cal-week__tag cal-week__tag--reading" href="http://neuralnetworksanddeeplearning.com">Reading: Nielsen (2019)</a>
+          <span class="cal-week__tag cal-week__tag--notes">Lecture Notes</span>
+          <span class="cal-week__tag cal-week__tag--homework">Homework: optional math review</span>
+        </div>
+      </div>
+    </div>
 
-*What exactly are neural networks? Why are they hard to study? How will we study them anyways?*
-- Readings: ch. 1 from [Nielson (2019)](http://neuralnetworksanddeeplearning.com) 
-- Lecture Notes: link
-- Homework: MAYBE, optional math review
+    <!-- Week 4 ----------------------------------------------------------- -->
+    <div class="cal-week">
+      <div class="cal-week__marker"><span class="week-num">Wk 4</span></div>
+      <div class="cal-week__card">
+        <h3 class="cal-week__title">
+          <span class="lecture-num">Lecture 3</span>
+          Analytically Solvable Settings I: Deep Linear Networks
+        </h3>
+        <p class="cal-week__question">
+          What can we learn about deep learning from a highly mathematically tractable toy model in deep linear networks?
+        </p>
+        <div class="cal-week__resources">
+          <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/1312.6120">Reading: Saxe et al. (2014)</a>
+          <a class="cal-week__tag cal-week__tag--notes" href="#">Lecture Notes</a>
+          <a class="cal-week__tag cal-week__tag--homework" href="#">Homework</a>
+        </div>
+      </div>
+    </div>
 
-### Week 4
-**Lecture 3**. Analytically Solvable Settings I: Deep Linear Networks
+    <!-- Week 5 ----------------------------------------------------------- -->
+    <div class="cal-week">
+      <div class="cal-week__marker"><span class="week-num">Wk 5</span></div>
+      <div class="cal-week__card">
+        <h3 class="cal-week__title">
+          <span class="lecture-num">Lecture 4</span>
+          Analytically Solvable Settings II + Insightful Limits I: The Neural Tangent Kernel and Kernel Regression
+        </h3>
+        <p class="cal-week__question">
+          How do neural networks simplify in the infinite-width limit?
+        </p>
+        <div class="cal-week__resources">
+          <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/1902.06720">Reading: Lee et al. (2019)</a>
+          <a class="cal-week__tag cal-week__tag--optional" href="https://arxiv.org/pdf/1806.07572">Optional Reading: Jacot et al. (2020)</a>
+          <span class="cal-week__tag cal-week__tag--notes">Lecture Notes</span>
+        </div>
+      </div>
+    </div>
 
-*What can we learn about deep learning from a highly mathematically tractable toy model in deep linear networks?* 
-- Readings: [Saxe et al. (2014)](https://arxiv.org/pdf/1312.6120)
-- Lecture Notes: link
-- Homework: link
+    <!-- Week 6 ----------------------------------------------------------- -->
+    <div class="cal-week">
+      <div class="cal-week__marker"><span class="week-num">Wk 6</span></div>
+      <div class="cal-week__card">
+        <h3 class="cal-week__title">
+          <span class="lecture-num">Lecture 5</span>
+          Analytically Solvable Settings III: Eigenlearning and the HEA
+        </h3>
+        <p class="cal-week__question">
+          How can we develop a mathematical framework to study kernel regression? Can we predict how kernel regression will perform on real data?
+        </p>
+        <div class="cal-week__resources">
+          <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/2110.03922">Reading: Simon et al. (2023)</a>
+          <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/2510.14878">Reading: Karkada et al. (2026)</a>
+          <span class="cal-week__tag cal-week__tag--notes">Lecture Notes</span>
+        </div>
+      </div>
+    </div>
 
-### Week 5 
-**Lecture 4**. Analytically Solvable Settings II + Insightful Limits I: The Neural Tangent Kernel and Kernel Regression
+    <!-- Week 7 ----------------------------------------------------------- -->
+    <div class="cal-week">
+      <div class="cal-week__marker"><span class="week-num">Wk 7</span></div>
+      <div class="cal-week__card">
+        <h3 class="cal-week__title">
+          <span class="lecture-num">Lecture 6</span>
+          Disentangling Hyperparameters I + Insightful Limits II: The Lazy (NTK) and Rich (&mu;P) Regimes
+        </h3>
+        <p class="cal-week__question">
+          In the lazy (NTK) regime, neural networks don&rsquo;t learn any structure. Is there a regime where they do?
+        </p>
+        <div class="cal-week__resources">
+          <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/2404.19719">Reading: Karkada et al. (2024)</a>
+          <a class="cal-week__tag cal-week__tag--optional" href="https://proceedings.mlr.press/v139/yang21c/yang21c.pdf">Optional Reading: Yang et al. (2021)</a>
+          <a class="cal-week__tag cal-week__tag--notes" href="#">Lecture Notes</a>
+          <span class="cal-week__tag cal-week__tag--homework">Homework</span>
+        </div>
+      </div>
+    </div>
 
-*How do neural networks simplify in the infinite-width limit?* 
-- Readings: [Lee et al. (2019)](https://arxiv.org/pdf/1902.06720) (optional: [Jacot et al. (2020)](https://arxiv.org/pdf/1806.07572))
-- Lecture Notes: link
+    <!-- Week 8 ----------------------------------------------------------- -->
+    <div class="cal-week">
+      <div class="cal-week__marker"><span class="week-num">Wk 8</span></div>
+      <div class="cal-week__card">
+        <h3 class="cal-week__title">
+          <span class="lecture-num">Lecture 7</span>
+          Analytically Solvable Settings IV: Balancedness and Feature Learning
+        </h3>
+        <p class="cal-week__question">
+          Are there toy models where we can exactly characterize a lazy/rich phase transition?
+        </p>
+        <div class="cal-week__resources">
+          <a class="cal-week__tag cal-week__tag--reading" href="https://proceedings.neurips.cc/paper_files/paper/2024/file/94074dd5a072d28ff75a76dabed43767-Paper-Conference.pdf">Reading: Kunin et al. (2024)</a>
+          <a class="cal-week__tag cal-week__tag--notes" href="#">Lecture Notes</a>
+          <a class="cal-week__tag cal-week__tag--homework" href="#">Homework</a>
+        </div>
+      </div>
+    </div>
 
-### Week 6 
-**Lecture 5**. Analytically Solvable Settings III: Eigenlearning and the HEA (potential guest lecture)
+    <!-- Week 9 ----------------------------------------------------------- -->
+    <div class="cal-week">
+      <div class="cal-week__marker"><span class="week-num">Wk 9</span></div>
+      <div class="cal-week__card">
+        <h3 class="cal-week__title">
+          <span class="lecture-num">Lecture 8</span>
+          Universality I: The Platonic Representation Hypothesis
+        </h3>
+        <p class="cal-week__question">
+          Do deep learning models learn similar representations of data across diverse architectures?
+        </p>
+        <div class="cal-week__resources">
+          <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/2405.07987">Reading: Huh et al. (2024)</a>
+          <span class="cal-week__tag cal-week__tag--notes">Lecture Notes</span>
+        </div>
+      </div>
+    </div>
 
-*How can we develop a mathematical framework to study kernel regression? Can we predict how kernel regression will perform on real data?*
-- Readings: [Simon et al. (2023)](https://arxiv.org/pdf/2110.03922), [Karkada et al. (2026)](https://arxiv.org/pdf/2510.14878)
-- Lecture Notes: link
+    <!-- Week 10 ---------------------------------------------------------- -->
+    <div class="cal-week cal-week--off">
+      <div class="cal-week__marker"><span class="week-num">Wk 10</span></div>
+      <div class="cal-week__card">
+        <div class="cal-week__title">Thanksgiving Break &mdash; No Class</div>
+      </div>
+    </div>
 
-### Week 7 
-**Lecture 6**. Disentangling Hyperparameters I + Insightful Limits II: The Lazy (NTK) and Rich (muP) Regimes
+    <!-- Week 11 ---------------------------------------------------------- -->
+    <div class="cal-week">
+      <div class="cal-week__marker"><span class="week-num">Wk 11</span></div>
+      <div class="cal-week__card">
+        <h3 class="cal-week__title">
+          <span class="lecture-num">Lecture 10</span>
+          Universality II: Fourier Features in Learned Representations
+        </h3>
+        <p class="cal-week__question">
+          What kind of features are learned by language models? How might we characterize where such features come from and how they&rsquo;re learned?
+        </p>
+        <div class="cal-week__resources">
+          <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/2602.15029">Reading: Karkada et al. (2026)</a>
+          <a class="cal-week__tag cal-week__tag--notes" href="#">Lecture Notes</a>
+          <a class="cal-week__tag cal-week__tag--homework" href="#">Homework</a>
+        </div>
+      </div>
+    </div>
 
-*In the lazy (NTK) regime, neural networks don't learn any structure. Is there a regime where they do?*
-- Readings: [Karkada et al. (2024)](https://arxiv.org/pdf/2404.19719) (optional: [Yang et al. (2021)](https://proceedings.mlr.press/v139/yang21c/yang21c.pdf))
-- Lecture Notes: link
-- Homework: link
+    <!-- Week 12 ---------------------------------------------------------- -->
+    <div class="cal-week">
+      <div class="cal-week__marker"><span class="week-num">Wk 12</span></div>
+      <div class="cal-week__card">
+        <h3 class="cal-week__title">
+          <span class="lecture-num">Lecture 11</span>
+          Empirical Laws I: The Edge of Stability
+        </h3>
+        <p class="cal-week__question">
+          Why do neural networks routinely train successfully while hovering on the very brink of numerical divergence?
+        </p>
+        <div class="cal-week__resources">
+          <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/2209.15594">Reading: Damian et al. (2023)</a>
+          <span class="cal-week__tag cal-week__tag--notes">Lecture Notes</span>
+        </div>
+      </div>
+    </div>
 
-### Week 8 
-**Lecture 7**. Analytically Solvable Settings IV: Balancedness and Feature Learning
+    <!-- Week 13 ---------------------------------------------------------- -->
+    <div class="cal-week cal-week--off">
+      <div class="cal-week__marker"><span class="week-num">Wk 13</span></div>
+      <div class="cal-week__card">
+        <div class="cal-week__title">Buffer Week</div>
+      </div>
+    </div>
 
-*Are there toy models where we can exactly characterize a lazy/rich phase transition?*
-- Readings: [Kunin et al. (2024)](https://proceedings.neurips.cc/paper_files/paper/2024/file/94074dd5a072d28ff75a76dabed43767-Paper-Conference.pdf)
-- Lecture Notes: link
-- Homework: link
+    <!-- Week 14 ---------------------------------------------------------- -->
+    <div class="cal-week">
+      <div class="cal-week__marker"><span class="week-num">Wk 14</span></div>
+      <div class="cal-week__card">
+        <h3 class="cal-week__title">
+          <span class="lecture-num">Lecture 13</span>
+          Final Project Hypothesis Presentations
+        </h3>
+      </div>
+    </div>
 
-### Week 9 
-**Lecture 8**. Universality I: The Platonic Representation Hypothesis
+    <!-- Week 15 ---------------------------------------------------------- -->
+    <div class="cal-week">
+      <div class="cal-week__marker"><span class="week-num">Wk 15</span></div>
+      <div class="cal-week__card">
+        <h3 class="cal-week__title">
+          <span class="lecture-num">Lecture 14</span>
+          Final Project Office Hours
+        </h3>
+      </div>
+    </div>
 
-*Do deep learning models learn similar representations of data across diverse architectures?*
-- Readings: [Huh et al. (2024)](https://arxiv.org/pdf/2405.07987)
-- Lecture Notes: link
+    <!-- Week 16 ---------------------------------------------------------- -->
+    <div class="cal-week cal-week--off">
+      <div class="cal-week__marker"><span class="week-num">Wk 16</span></div>
+      <div class="cal-week__card">
+        <div class="cal-week__title">RRR Week &mdash; No Class</div>
+      </div>
+    </div>
 
-### Week 10 
-(Thanksgiving Break: No Class)
-
-### Week 11
-**Lecture 10**. Universality II: Fourier Features in Learned Representations
-
-*What kind of features are learned by language models? How might we characterize where such features come from and how they're learned?*
-- Readings: [Karkada et al. (2026)](https://arxiv.org/pdf/2602.15029)
-- Lecture Notes: link
-- Homework: link
-
-### Week 12
-**Lecture 11**. Empirical Laws I: The Edge of Stability
-
-*Why do neural networks routinely train successfully while hovering on the very brink of numerical divergence?*
-- Readings: [Damian et al. (2023)](https://arxiv.org/pdf/2209.15594)
-- Lecture Notes:
-
-### Week 13
-(buffer)
-
-### Week 14
-**Lecture 13**. Final Project Hypothesis Presentations 
-
-### Week 15
-**Lecture 14**. Final Project Office Hours
-
-### Week 16 
-(RRR Week: No Class)
+  </div>
+</div>
 
 
 

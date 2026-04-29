@@ -1,15 +1,7 @@
-// =============================================================================
-// Learning Mechanics DeCal — Custom Calendar Styles
-// Distill.pub-inspired academic aesthetic
-// =============================================================================
-
-// Import EB Garamond for serif reading text
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
-
 // -----------------------------------------------------------------------------
 // Variables
 // -----------------------------------------------------------------------------
-$serif: 'EB Garamond', 'Georgia', serif;
+$main-font: 'Segoe UI';
 $accent: #1a3a5c;        // deep navy
 $accent-light: #e8eef4;  // pale blue-grey
 $border: #d4dae0;
@@ -27,7 +19,7 @@ $off-week-bg: #f8f9fa;
     margin-bottom: 0.25rem;
 
     h2 {
-      font-family: $serif;
+      font-family: $main-font;
       font-weight: 500;
       font-size: 1.75rem;
       letter-spacing: -0.01em;
@@ -119,7 +111,7 @@ $off-week-bg: #f8f9fa;
 
   // lecture number + title
   &__title {
-    font-family: $serif;
+    font-family: $main-font;
     font-size: 1.15rem;
     font-weight: 500;
     color: #1a1a1a;
@@ -140,7 +132,7 @@ $off-week-bg: #f8f9fa;
 
   // guiding question
   &__question {
-    font-family: $serif;
+    font-family: $main-font;
     font-style: italic;
     font-size: 1.02rem;
     line-height: 1.5;

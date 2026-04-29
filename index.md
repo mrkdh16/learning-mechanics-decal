@@ -5,7 +5,7 @@ nav_order: 1
 ---
 
 # Welcome to the Learning Mechanics DeCal!
-*Learning Mechanics* is the emerging discipline that treats deep learning the way physics treats the natural world: seeking compact mathematical principles, tight connections between theory and experiment, and simple, intuitive explanations for complex phenomena. Pieces of a scientific theory for deep learning are beginning to fit together, and in this course, we will examine what has been assembled so far, what remains contested, and where the field is heading.
+*Learning Mechanics* is the emerging discipline that treats deep learning the way physics treats the natural world: seeking compact mathematical principles[^1], tight connections between theory and experiment, and simple, intuitive explanations for complex phenomena. Pieces of a scientific theory for deep learning are beginning to fit together, and in this course, we will examine what has been assembled so far, what remains contested, and where the field is heading.
 
 Deep learning is among the most powerful technologies humans have ever built, and understanding it promises to be one of the defining intellectual challenges of the early 21st century. As of 2026, the engineering success of deep learning has dramatically outpaced our scientific understanding of it. Closing that gap may amount to founding a genuinely new field of science—one whose implications for our understanding of intelligence, data, and learning extend well beyond the neural networks that motivated it.
 
@@ -39,7 +39,7 @@ Readings draw heavily from the whitepaper _There Will Be a Scientific Theory of 
           What&rsquo;s the evidence for an emerging scientific theory of deep learning?
         </p>
         <div class="cal-week__resources">
-          <span class="cal-week__tag cal-week__tag--reading">Reading: Simon et al. (2026)</span>
+          <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/2604.21691">Reading: Simon et al. (2026)</a>
         </div>
       </div>
     </div>
@@ -262,3 +262,7 @@ Readings draw heavily from the whitepaper _There Will Be a Scientific Theory of 
 
   </div>
 </div>
+
+---
+
+[^1]: From [Wikipedia](https://en.wikipedia.org/wiki/First_principle): "*In physics and other sciences, theoretical work is said to be from first principles, or ab initio, if it starts directly at the level of established science and does not make assumptions such as empirical model and parameter fitting. "First principles thinking" consists of decomposing things down to the fundamental axioms in the given arena, before reasoning up by asking which ones are relevant to the question at hand, then cross referencing conclusions based on chosen axioms and making sure conclusions do not violate any fundamental laws.*"

@@ -3,11 +3,17 @@ layout: default
 title: Syllabus
 nav_order: 2
 ---
-
 # Syllabus
+- **Course Title**: Physics 198: (Deep) Learning Mechanics
+- **Units**: 2
+- **Instructor**: Mark Rhee
+- **Email**: mrkdh@berkeley.edu
+- **Faculty Sponsor**: Michael DeWeese
+- **Location**: TBD
+- **Time**: TBD
 
 ## Course Description
-*Learning Mechanics* is the emerging discipline that treats deep learning the way physics treats the natural world: seeking compact mathematical principles, tight connections between theory and experiment, and simple, intuitive explanations for complex phenomena. Pieces of a scientific theory for deep learning are beginning to fit together, and in this course, we will examine what has been assembled so far, what remains contested, and where the field is heading.
+*Learning Mechanics* is the emerging discipline that treats deep learning the way physics treats the natural world: seeking compact mathematical principles[^1], tight connections between theory and experiment, and simple, intuitive explanations for complex phenomena. Pieces of a scientific theory for deep learning are beginning to fit together, and in this course, we will examine what has been assembled so far, what remains contested, and where the field is heading.
 
 Deep learning is among the most powerful technologies humans have ever built, and understanding it promises to be one of the defining intellectual challenges of the early 21st century. As of 2026, the engineering success of deep learning has dramatically outpaced our scientific understanding of it. Closing that gap may amount to founding a genuinely new field of science—one whose implications for our understanding of intelligence, data, and learning extend well beyond the neural networks that motivated it.
 
@@ -35,6 +41,7 @@ The course is structured around five lines of evidence that a scientific theory 
 3. **Meaningful macroscopic statistics** are captured by simple equations.
 4. **Hyperparameters can be disentangled** and understood.
 5. **Universal phenomena** appear across settings and tasks.
+
 The following is a non-exhaustive list of content we will cover:
 - Deep Linear Networks (DLNs)
 - The Neural Tangent Kernel (NTK)
@@ -48,17 +55,18 @@ The following is a non-exhaustive list of content we will cover:
 - The Edge of Stability (EoS)
 
 ## Grading
-- **Attendance & Participation 10%**
+Grading will be done on an absolute scale, with any grade above 70 points receiving a Pass.
+- **Attendance & Participation 10 points**
 	- The liveliness of this course heavily depends on in-class participation. Please show up to class and ask questions! Two unexcused absences are allowed without penalty.
-- **Reading Questions 20%**
+- **Reading Questions 20 points**
 	- For every paper we read, please generate 2-3 questions and submit them before class.
-- **Final Project 30%**
+- **Final Project 30 points**
 	- The final project is the capstone of the course. Working individually or in pairs, you will:
 		- **Identify a phenomenon** related to topics covered in class (or for the especially ambitious, a related open problem from the whitepaper).
 		- **Formulate a testable hypothesis** about that phenomenon.
 		- **Design and run an experiment** to test the hypothesis (computational experiments on small models are perfectly appropriate).
 		- **Present and write up your findings**, including whether the hypothesis was supported, what you learned, and what questions remain.
-- **Homework Assignments 40%**
+- **Homework Assignments 40 points**
 	- Three to four problem sets will be distributed over the semester. These will mix analytical derivations with computational exercises. Collaboration is encouraged but each student must write up their own solutions.
 
 ## Weekly Schedule
@@ -155,3 +163,7 @@ Each session is 2 hours long. A typical class includes a 50-60 minute lecture on
 
 ### Week 16 
 (RRR Week: No Class)
+
+---
+
+[^1]: From [Wikipedia](https://en.wikipedia.org/wiki/First_principle): "*In physics and other sciences, theoretical work is said to be from first principles, or ab initio, if it starts directly at the level of established science and does not make assumptions such as empirical model and parameter fitting. "First principles thinking" consists of decomposing things down to the fundamental axioms in the given arena, before reasoning up by asking which ones are relevant to the question at hand, then cross referencing conclusions based on chosen axioms and making sure conclusions do not violate any fundamental laws.*"

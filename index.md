@@ -57,7 +57,7 @@ Readings draw heavily from the whitepaper _There Will Be a Scientific Theory of 
         </p>
         <div class="cal-week__resources">
           <a class="cal-week__tag cal-week__tag--reading" href="http://neuralnetworksanddeeplearning.com">Reading: Nielsen (2019)</a>
-          <span class="cal-week__tag cal-week__tag--notes">Lecture Notes</span>
+          <a class="cal-week__tag cal-week__tag--notes" href="lecture-notes/ch1.pdf">Lecture Notes</a>
           <span class="cal-week__tag cal-week__tag--homework">Homework: optional math review</span>
         </div>
       </div>
@@ -69,15 +69,14 @@ Readings draw heavily from the whitepaper _There Will Be a Scientific Theory of 
       <div class="cal-week__card">
         <h3 class="cal-week__title">
           <span class="lecture-num">Lecture 3</span>
-          Analytically Solvable Settings I: Deep Linear Networks
+          Toy Model I: Deep Linear Networks
         </h3>
         <p class="cal-week__question">
           What can we learn about deep learning from a highly mathematically tractable toy model in deep linear networks?
         </p>
         <div class="cal-week__resources">
           <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/1312.6120">Reading: Saxe et al. (2014)</a>
-          <a class="cal-week__tag cal-week__tag--notes" href="#">Lecture Notes</a>
-          <a class="cal-week__tag cal-week__tag--homework" href="#">Homework</a>
+          <span class="cal-week__tag cal-week__tag--notes">Lecture Notes</span>
         </div>
       </div>
     </div>
@@ -88,15 +87,14 @@ Readings draw heavily from the whitepaper _There Will Be a Scientific Theory of 
       <div class="cal-week__card">
         <h3 class="cal-week__title">
           <span class="lecture-num">Lecture 4</span>
-          Analytically Solvable Settings II + Insightful Limits I: The Neural Tangent Kernel and Kernel Regression
+          Toy Model I: Deep Linear Networks (continued)
         </h3>
         <p class="cal-week__question">
-          How do neural networks simplify in the infinite-width limit?
+          How can we analytically solve for the training dynamics of deep linear networks?
         </p>
         <div class="cal-week__resources">
-          <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/1902.06720">Reading: Lee et al. (2019)</a>
-          <a class="cal-week__tag cal-week__tag--optional" href="https://arxiv.org/pdf/1806.07572">Optional Reading: Jacot et al. (2020)</a>
           <span class="cal-week__tag cal-week__tag--notes">Lecture Notes</span>
+          <span class="cal-week__tag cal-week__tag--homework">Homework</span>
         </div>
       </div>
     </div>
@@ -107,14 +105,14 @@ Readings draw heavily from the whitepaper _There Will Be a Scientific Theory of 
       <div class="cal-week__card">
         <h3 class="cal-week__title">
           <span class="lecture-num">Lecture 5</span>
-          Analytically Solvable Settings III: Eigenlearning and the HEA
+          Toy Model II: Kernel Regression and the NTK
         </h3>
         <p class="cal-week__question">
-          How can we develop a mathematical framework to study kernel regression? Can we predict how kernel regression will perform on real data?
+          Is there a limit in which neural networks become analytically solvable?
         </p>
         <div class="cal-week__resources">
-          <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/2110.03922">Reading: Simon et al. (2023)</a>
-          <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/2510.14878">Reading: Karkada et al. (2026)</a>
+          <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/1902.06720">Reading: Lee et al. (2019)</a>
+          <a class="cal-week__tag cal-week__tag--optional" href="https://arxiv.org/pdf/1806.07572">Optional Reading: Jacot et al. (2020)</a>
           <span class="cal-week__tag cal-week__tag--notes">Lecture Notes</span>
         </div>
       </div>
@@ -126,15 +124,15 @@ Readings draw heavily from the whitepaper _There Will Be a Scientific Theory of 
       <div class="cal-week__card">
         <h3 class="cal-week__title">
           <span class="lecture-num">Lecture 6</span>
-          Disentangling Hyperparameters I + Insightful Limits II: The Lazy (NTK) and Rich (&mu;P) Regimes
+          Toy Model II: Kernel Regression and the NTK (continued)
         </h3>
         <p class="cal-week__question">
-          In the lazy (NTK) regime, neural networks don&rsquo;t learn any structure. Is there a regime where they do?
+          How can we develop a mathematical framework to study kernel regression? Can we predict how kernel regression will perform on real data?
         </p>
         <div class="cal-week__resources">
-          <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/2404.19719">Reading: Karkada et al. (2024)</a>
-          <a class="cal-week__tag cal-week__tag--optional" href="https://proceedings.mlr.press/v139/yang21c/yang21c.pdf">Optional Reading: Yang et al. (2021)</a>
-          <a class="cal-week__tag cal-week__tag--notes" href="#">Lecture Notes</a>
+          <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/2110.03922">Reading: Simon et al. (2023)</a>
+          <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/2510.14878">Reading: Karkada et al. (2026)</a>
+          <span class="cal-week__tag cal-week__tag--notes">Lecture Notes</span>
           <span class="cal-week__tag cal-week__tag--homework">Homework</span>
         </div>
       </div>
@@ -146,15 +144,14 @@ Readings draw heavily from the whitepaper _There Will Be a Scientific Theory of 
       <div class="cal-week__card">
         <h3 class="cal-week__title">
           <span class="lecture-num">Lecture 7</span>
-          Analytically Solvable Settings IV: Balancedness and Feature Learning
+          The Lazy (NTK) and Rich (&mu;P) Regimes
         </h3>
         <p class="cal-week__question">
-          Are there toy models where we can exactly characterize a lazy/rich phase transition?
+          In the lazy (NTK) regime, neural networks don&rsquo;t learn any structure. Is there a regime where they do?
         </p>
         <div class="cal-week__resources">
-          <a class="cal-week__tag cal-week__tag--reading" href="https://proceedings.neurips.cc/paper_files/paper/2024/file/94074dd5a072d28ff75a76dabed43767-Paper-Conference.pdf">Reading: Kunin et al. (2024)</a>
-          <a class="cal-week__tag cal-week__tag--notes" href="#">Lecture Notes</a>
-          <a class="cal-week__tag cal-week__tag--homework" href="#">Homework</a>
+          <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/2310.17813">Reading: Yang et al. (2024)</a>
+          <span class="cal-week__tag cal-week__tag--notes">Lecture Notes</span>
         </div>
       </div>
     </div>
@@ -165,14 +162,15 @@ Readings draw heavily from the whitepaper _There Will Be a Scientific Theory of 
       <div class="cal-week__card">
         <h3 class="cal-week__title">
           <span class="lecture-num">Lecture 8</span>
-          Universality I: The Platonic Representation Hypothesis
+          The Lazy (NTK) and Rich (&mu;P) Regimes (continued)
         </h3>
         <p class="cal-week__question">
-          Do deep learning models learn similar representations of data across diverse architectures?
+          How can we disentangle hyperparameters to maximize feature learning?
         </p>
         <div class="cal-week__resources">
-          <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/2405.07987">Reading: Huh et al. (2024)</a>
+          <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/2310.17813">Reading: Yang et al. (2024)</a>
           <span class="cal-week__tag cal-week__tag--notes">Lecture Notes</span>
+          <span class="cal-week__tag cal-week__tag--homework">Homework</span>
         </div>
       </div>
     </div>
@@ -191,15 +189,17 @@ Readings draw heavily from the whitepaper _There Will Be a Scientific Theory of 
       <div class="cal-week__card">
         <h3 class="cal-week__title">
           <span class="lecture-num">Lecture 10</span>
-          Universality II: Fourier Features in Learned Representations
+          Case Study I: Grokking
         </h3>
         <p class="cal-week__question">
-          What kind of features are learned by language models? How might we characterize where such features come from and how they&rsquo;re learned?
+          How can we apply the tools of learning mechanics to understand grokking?
         </p>
         <div class="cal-week__resources">
-          <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/2602.15029">Reading: Karkada et al. (2026)</a>
-          <a class="cal-week__tag cal-week__tag--notes" href="#">Lecture Notes</a>
-          <a class="cal-week__tag cal-week__tag--homework" href="#">Homework</a>
+          <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/2406.06158v2">Reading: Kunin et al. (2024)</a>
+          <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/2310.06110">Reading: Kumar et al. (2024)</a>
+          <a class="cal-week__tag cal-week__tag--optional" href="https://arxiv.org/pdf/2301.05217">Optional Reading: Nanda et al. (2023)</a>
+          <span class="cal-week__tag cal-week__tag--notes">Lecture Notes</span>
+          <span class="cal-week__tag cal-week__tag--homework">Homework</span>
         </div>
       </div>
     </div>
@@ -210,14 +210,15 @@ Readings draw heavily from the whitepaper _There Will Be a Scientific Theory of 
       <div class="cal-week__card">
         <h3 class="cal-week__title">
           <span class="lecture-num">Lecture 11</span>
-          Empirical Laws I: The Edge of Stability
+          Case Study II: Representational Geometry
         </h3>
         <p class="cal-week__question">
-          Why do neural networks routinely train successfully while hovering on the very brink of numerical divergence?
+          What kind of features are learned by language models? How might we characterize where such features come from and how they&rsquo;re learned?
         </p>
         <div class="cal-week__resources">
-          <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/2209.15594">Reading: Damian et al. (2023)</a>
+          <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/2602.15029">Reading: Karkada et al. (2026)</a>
           <span class="cal-week__tag cal-week__tag--notes">Lecture Notes</span>
+          <span class="cal-week__tag cal-week__tag--homework">Homework</span>
         </div>
       </div>
     </div>

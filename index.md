@@ -9,7 +9,7 @@ nav_order: 1
 
 Deep learning is among the most powerful technologies humans have ever built, and understanding it promises to be one of the defining intellectual challenges of the early 21st century. As of 2026, the engineering success of deep learning has dramatically outpaced our scientific understanding of it. Closing that gap may amount to founding a genuinely new field of science—one whose implications for our understanding of intelligence, data, and learning extend well beyond the neural networks that motivated it.
 
-Readings draw heavily from the whitepaper _There Will Be a Scientific Theory of Deep Learning_ (Simon et al., 2026) and the primary literature it synthesizes.
+Readings draw heavily from the whitepaper <a href="https://arxiv.org/pdf/2604.21691">_There Will Be a Scientific Theory of Deep Learning_ (Simon et al., 2026)</a> and the primary literature it synthesizes.
 
 <div class="course-calendar" markdown="0">
   <div class="course-calendar__header">

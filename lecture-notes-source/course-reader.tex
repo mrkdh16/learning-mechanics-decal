@@ -1,0 +1,62 @@
+\documentclass[11pt, oneside]{book}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{macros}
+\usepackage{enumitem}
+\geometry{margin=1in}
+
+\newcounter{exercise}
+\newenvironment{exercise}[1][]{%
+    \par\medskip\refstepcounter{exercise}%
+    \noindent\textbf{Exercise \theexercise.}\ \textit{#1}\par\nopagebreak\medskip%
+}{\par\medskip}
+
+% \title{\textbf{Physics 198: Learning Mechanics \\
+% \large Course Notes}}
+% \date{UC Berkeley}
+% \author{Mark Rhee}
+
+\begin{document}
+% \maketitle
+
+\begin{titlepage}
+\newgeometry{top=2in, bottom=1in, left=1in, right=1in}
+\raggedright
+ 
+\vspace*{2cm}
+{\fontsize{32}{40}\selectfont\bfseries Learning Mechanics}\\[0.6em]
+{\fontsize{20}{28}\selectfont\bfseries Course Notes}
+ 
+\vspace{2.5cm}
+ 
+{\large Mark Rhee}
+ 
+\vfill
+ 
+\restoregeometry
+\end{titlepage}
+
+\chapter{Introduction to Neural Networks}
+\input{chapters/chapter-01-body}
+\input{problems/chapter-01-problem}
+\clearpage
+
+\chapter{Toy Model I: Deep Linear Networks}
+\input{chapters/chapter-02-body}
+\input{problems/chapter-02-problems}
+\clearpage
+
+\chapter{Toy Model II: Kernel Regression}
+\input{chapters/chapter-03-body}
+\clearpage
+
+\end{document}

@@ -1,0 +1,171 @@
+\usepackage{microtype}
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+\usepackage{parskip}
+
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{duckuments}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{nccmath}
+\usepackage{physics}
+\usepackage{bbm}
+
+\usepackage{csquotes}
+\usepackage[english]{babel}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = blue, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor   = blue %Colour of citations
+}
+% Attempt to make hyperref and algorithmic work together better:
+\newcommand{\theHalgorithm}{\arabic{algorithm}}
+
+\usepackage{silence}
+\WarningFilter{hyperref}{Ignoring empty anchor}
+
+\usepackage[capitalize,noabbrev,nameinlink]{cleveref}
+\usepackage{aliascnt}
+\newaliascnt{app}{section}
+\crefname{app}{Appendix}{Appendices}
+\Crefname{app}{Appendix}{Appendices}
+\aliascntresetthe{app}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FOR THIS DOCUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\dhruva}[1]{{\color{Purple}Dhruva: #1}}
+% \newcommand{\mark}[1]{{\color{SeaGreen}Daniel: #1}}
+
+\newcommand{\Mstar}{\mM^\star}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% USEFUL COMMANDS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\remind}{\textcolor{red}{\rule{8pt}{8pt}}}
+\newcommand{\todo}{\textcolor{red}{\textbf{TODO}}}
+\newcommand{\qtext}[1]{\quad\text{#1}\quad}
+\renewcommand{\qqtext}[1]{\qquad\text{#1}\qquad}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CUSTOM MATH NOTATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\E[2]{\mathop{\mathbb{E}}_{#1} \! \left[ #2 \right]}
+\newcommand\Var[2]{\mathrm{Var}_{#1} \! \left[ #2 \right]}
+\newcommand\Cov[2]{\mathrm{Cov}_{#1} \! \left[ #2 \right]}
+\newcommand{\diag}[1]{\text{diag}{#1}}
+\newcommand{\T}[1]{{#1}^\top}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\din}{{d_\mathrm{in}}}
+\newcommand{\dout}{{d_\mathrm{out}}}
+\newcommand{\idx}[1]{{(#1)}}
+\newcommand{\iu}{\mathrm{i}}
+
+\newcommand{\defn}{\coloneqq}
+\newcommand{\setsim}{\overset{\text{!}}{\sim}}
+\newcommand{\seteq}{\overset{\text{!}}{=}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BOLD LETTERS FOR VECTORS AND MATRICES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Vectors
+\def\vzero{{\bm{0}}}
+\def\vone{{\bm{1}}}
+\def\vmu{{\bm{\mu}}}
+\def\vtheta{{\bm{\theta}}}
+\def\vphi{{\bm{\phi}}}
+\def\valpha{{\bm{\alpha}}}
+\def\va{{\bm{a}}}
+\def\vb{{\bm{b}}}
+\def\vc{{\bm{c}}}
+\def\vd{{\bm{d}}}
+\def\ve{{\bm{e}}}
+\def\vf{{\bm{f}}}
+\def\vg{{\bm{g}}}
+\def\vh{{\bm{h}}}
+\def\vi{{\bm{i}}}
+\def\vj{{\bm{j}}}
+\def\vk{{\bm{k}}}
+\def\vl{{\bm{l}}}
+\def\vm{{\bm{m}}}
+\def\vn{{\bm{n}}}
+\def\vo{{\bm{o}}}
+\def\vp{{\bm{p}}}
+\def\vq{{\bm{q}}}
+\def\vr{{\bm{r}}}
+\def\vs{{\bm{s}}}
+\def\vt{{\bm{t}}}
+\def\vu{{\bm{u}}}
+\def\vv{{\bm{v}}}
+\def\vw{{\bm{w}}}
+\def\vx{{\bm{x}}}
+\def\vy{{\bm{y}}}
+\def\vz{{\bm{z}}}
+\def\bphi{{\bm{\phi}}}
+
+% Matrices
+\def\mA{{\bm{A}}}
+\def\mB{{\bm{B}}}
+\def\mC{{\bm{C}}}
+\def\mD{{\bm{D}}}
+\def\mE{{\bm{E}}}
+\def\mF{{\bm{F}}}
+\def\mG{{\bm{G}}}
+\def\mH{{\bm{H}}}
+\def\mI{{\bm{I}}}
+\def\mJ{{\bm{J}}}
+\def\mK{{\bm{K}}}
+\def\mL{{\bm{L}}}
+\def\mM{{\bm{M}}}
+\def\mN{{\bm{N}}}
+\def\mO{{\bm{O}}}
+\def\mP{{\bm{P}}}
+\def\mQ{{\bm{Q}}}
+\def\mR{{\bm{R}}}
+\def\mS{{\bm{S}}}
+\def\mT{{\bm{T}}}
+\def\mU{{\bm{U}}}
+\def\mV{{\bm{V}}}
+\def\mW{{\bm{W}}}
+\def\mX{{\bm{X}}}
+\def\mY{{\bm{Y}}}
+\def\mZ{{\bm{Z}}}
+\def\mDelta{{\bm{\Delta}}}
+\def\mGamma{{\bm{\Gamma}}}
+\def\mLambda{{\bm{\Lambda}}}
+\def\mPhi{{\bm{\Phi}}}
+\def\mSigma{{\bm{\Sigma}}}
+\def\mOmega{{\bm{\Omega}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THEOREMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}[definition]{Example}
+\newtheorem{assumption}[definition]{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}[section]{Remark}
+
+% misc
+
+\newcommand{\Lcal}{\mathcal{L}}
+\newcommand{\Dcal}{\mathcal{D}}

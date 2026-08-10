@@ -17,7 +17,7 @@ nav_order: 2
 
 Deep learning is among the most powerful technologies humans have ever built, and understanding it promises to be one of the defining intellectual challenges of the early 21st century. As of 2026, the engineering success of deep learning has dramatically outpaced our scientific understanding of it. Closing that gap may amount to founding a genuinely new field of science—one whose implications for our understanding of intelligence, data, and learning extend well beyond the neural networks that motivated it.
 
-Readings draw heavily from the perspective paper _There Will Be a Scientific Theory of Deep Learning_ (Simon et al., 2026) and the primary literature it synthesizes.
+Readings draw heavily from the perspective paper [_There Will Be a Scientific Theory of Deep Learning_ (Simon et al., 2026)](https://arxiv.org/pdf/2604.21691) and the primary literature it synthesizes.
 
 ## Prerequisites
 - Linear algebra and multivariate calculus at the level of Math 53, 54 / 110
@@ -33,13 +33,18 @@ Grading will be done on an absolute scale, with any grade above 70 points receiv
 - **Reading Questions 20 points**
 	- For every paper we read, please generate 2-3 questions and submit them before class.
 - **Final Project 30 points**
-	- The final project is the capstone of the course. Working individually or in pairs, you will:
-		- **Identify a phenomenon** related to topics covered in class (or for the especially ambitious, a related open problem from the whitepaper).
-		- **Formulate a testable hypothesis** about that phenomenon.
-		- **Design and run an experiment** to test the hypothesis (computational experiments on small models are perfectly appropriate).
-		- **Present and write up your findings**, including whether the hypothesis was supported, what you learned, and what questions remain.
+	- The final project is the capstone of the course. Working individually or in pairs, you will choose between an experiment or an exposition:
+        - Formulate a **hypothesis**, run an **experiment**
+            - *Identify a phenomenon* related to topics covered in class (or for the especially ambitious, a related open problem from the whitepaper).
+            - *Formulate and present a testable hypothesis* about that phenomenon.
+            - *Design and run an experiment* to test the hypothesis (computational experiments on small models are perfectly appropriate).
+            - *Write up your findings*, including whether the hypothesis was supported, what you learned, and what questions remain.
+        - Write a **blog post** introducing a learning mechanics idea
+            - *Identify a phenomenon* related to topics covered in class
+            - *Create and present a web widget* about that phenomenon.
+            - *Write up a short blog post* introducing a newcomer to the particular phenomenon.
 - **Homework Assignments 40 points**
-	- Three to four problem sets will be distributed over the semester. These will mix analytical derivations with computational exercises. Collaboration is encouraged but each student must write up their own solutions.
+	- Three to four problem sets will be distributed over the semester. Collaboration is encouraged but each student must write up their own solutions.
 
 ## Learning Objectives
 By the end of the course, students will be able to:
@@ -51,12 +56,14 @@ By the end of the course, students will be able to:
 
 ## Course Content
 The learning mechanics perspective paper (Simon et al., 2026) is structured around five lines of evidence that a scientific theory of deep learning is within reach:
+
 1. **Analytically solvable settings** (toy models) that exhibit nontrivial learning phenomena exist.
 2. **Insightful limits** reveal fundamental behavior.
 3. **Meaningful macroscopic statistics** are captured by simple equations.
 4. **Hyperparameters can be disentangled** and understood.
 5. **Universal phenomena** appear across settings and tasks.
-This course will focus on 1) analytically solvable settings and 2) insightful limits and briefly touch on 4) disentangling hyperparameters and 5) universal phenomena.
+
+This course will focus on 1) analytically solvable settings and 2) insightful limits, and briefly touch on 4) disentangling hyperparameters and 5) universal phenomena.
 
 The following is a non-exhaustive list of content we will cover:
 - Deep Linear Networks (DLNs)

@@ -1,0 +1,17 @@
+In the previous chapter we studied deep linear networks, i.e., networks that are a linear function of their input data. What made the analysis interesting was their nonlinear training dynamics. Such nonlinear training dynamics are a result of a subtlety in the word "\textit{linear}" in deep linear network. It's true that the network is linear with respect to each individual weight matrix $W_i$. However, if we consider the weights collectively, stacking all the scalar weights in one ginormous \textit{parameter vector} $\theta$, then a deep linear network is decidedly \textit{not} linear in $\theta$. In fact, a deep linear network with $L$ layers is an $L$th order polynomial of $\theta$. This is essentially what results in coupled dynamics and why we had to solve nonlinear ODEs to obtain the optimization trajectories of the weights. This is also what made deep linear networks a decent toy model of neural network training dynamics. 
+
+In this chapter, instead of networks that are a linear function of their input data, we will study networks that are a linear\footnote{Technically affine.} function of their parameter vector $\theta$. A good way to think about such networks $f(x)$ is that their weights $\theta$ deviate so little from initialization throughout training that the network as a whole is well approximated by its first-order (linear) Taylor expansion centered at its weights at initialization $\theta^{(0)}$:
+
+\begin{align}
+    f^{(t)}(x) &=f^{(0)}(x) + \left(\nabla_{\theta} f(x) \rvert_{\theta=\theta^{(0)}}\right)^\top (\theta^{(t)}-\theta^{(0)}) \\
+    &= \text{const. scalar} + (\text{const. vector})^{\top}(\text{change in weights}) 
+\end{align}
+
+Crucially, the terms $f^{(0)}(x)$ and $\nabla_{\theta} f(x) \rvert_{\theta=\theta^{(0)}}$ are determined at initialization and stay constant throughout training. The weights of this kind of network undergo very simple, exactly solvable optimization trajectories. The reason we are interested in these kinds of networks is that in the infinite-width limit, almost every hyperparameter setting of a neural network results in this kind of linear training\footnote{muP caveat}. Intuitively, the reason is that in the infinite-width limit, it's very hard to get the weights to change a meaningful amount throughout training.
+
+\subsection*{A new limit: $\text{width} \to \infty$}
+
+
+
+\subsection*{Training dynamics}
+

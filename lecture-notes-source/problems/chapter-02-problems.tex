@@ -1,0 +1,152 @@
+\section*{Chapter 2 Exercises}
+
+These exercises fill in the calculations we deferred in the main text. None of
+them require any tools beyond what's in the chapter.
+
+% ---------------------------------------------------------------------
+\subsection*{2.1 The loss in covariance form.}
+In the setup, we claimed that ``with some matrix algebra'' the mean squared error
+can be rewritten purely in terms of the data covariances. Verify this. Starting
+from
+\begin{align*}
+    \Lcal(W_1, \dots, W_L)
+    = \mathbb{E}_{(x,y)\sim\Dcal}
+      \Big[\Tr\,(y - W_L \cdots W_1 x)(y - W_L \cdots W_1 x)^\top \Big],
+\end{align*}
+expand the product inside the trace, use linearity of the trace and the
+expectation, and substitute the definitions $\Sigma_{xx} := \mathbb{E}_\Dcal[xx^\top]$,
+$\Sigma_{yx} := \mathbb{E}_\Dcal[yx^\top]$, and $\Sigma_{yy} := \mathbb{E}_\Dcal[yy^\top]$
+to arrive at
+\begin{align*}
+    \Lcal(W_1, \dots, W_L)
+    = \|\Sigma_{yx}\Sigma_{xx}^{-1/2} - W_L \cdots W_1 \Sigma_{xx}^{1/2}\|_\mathrm{F}^2
+      + \mathrm{const.}
+\end{align*}
+where $\mathrm{const.} = \Sigma_{yy} - \Sigma_{yx}(\Sigma_{xx})^{-1}(\Sigma_{yx})^\top$.
+Confirm that the constant term does not depend on the weight matrices.
+
+\emph{Hint:} ``complete the square'' at the level of matrices---add and subtract
+$\Sigma_{yx}\Sigma_{xx}^{-1/2}$ inside the Frobenius norm.
+
+% ---------------------------------------------------------------------
+% \begin{exercise}[The conservation law, by the algebra trick.]
+% Derive the conservation law of Equation~(\ref{eq:conservation-ex}) the same way the
+% chapter body does.
+% \begin{enumerate}[label=(\alph*)]
+%     \item Compute the gradients $\nabla_{W_1}\Lcal$ and $\nabla_{W_2}\Lcal$ for the
+%     2-layer loss and confirm the gradient flow equations
+%     \begin{align*}
+%         \frac{d}{dt}W_1 &= W_2^\top(\Sigma_{yx} - W_2 W_1 \Sigma_{xx}), &
+%         \frac{d}{dt}W_2 &= (\Sigma_{yx} - W_2 W_1 \Sigma_{xx}) W_1^\top.
+%     \end{align*}
+%     \item Using these, show that
+%     $\big(\tfrac{d}{dt}W_1\big)W_1^\top = W_2^\top\big(\tfrac{d}{dt}W_2\big)$, and
+%     hence that
+%     \begin{equation}
+%         \frac{d}{dt}\big(W_2^\top W_2 - W_1 W_1^\top\big) = 0.
+%         \label{eq:conservation-ex}
+%     \end{equation}
+%     \item Conclude that $H := W_2^\top W_2 - W_1 W_1^\top$ is constant along the
+%     gradient flow trajectory, so a network initialized balanced ($H \approx 0$)
+%     stays balanced.
+% \end{enumerate}
+% \end{exercise}
+
+% ---------------------------------------------------------------------
+\subsection*{2.2 The conservation law, from the symmetry.}
+The algebra trick used in the chapter to derive the conservation law $\frac{d}{dt}[W_2^\top W_2 - W_1 W_1^\top] = 0$ derives it as if by
+luck. This exercise re-derives it from the continuous
+symmetry of the loss, making clear \emph{why} the trick works.
+
+Throughout, use the matrix inner product $\langle A, B\rangle := \Tr(A^\top B)$,
+and recall the gradient flow $\dot\theta = -\nabla\Lcal$ for $\theta = (W_1, W_2)$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item \emph{(Symmetry $\Rightarrow$ orthogonality.)} Suppose $\Lcal$ is
+    invariant under a one-parameter family of transformations
+    $\theta \mapsto \theta + \epsilon\, v(\theta)$, with generator (velocity field)
+    $v$. Show that invariance, to first order in $\epsilon$, is equivalent to
+    \begin{align*}
+        \langle v(\theta), \nabla\Lcal(\theta)\rangle = 0 \quad \text{for all } \theta.
+    \end{align*}
+    \item \emph{(Gradient flow never moves along the symmetry.)} Substitute the
+    gradient flow equation to conclude that $\langle v(\theta), \dot\theta\rangle = 0$
+    along any trajectory. Interpret this geometrically: the gradient flow velocity
+    is always orthogonal to the symmetry direction, so optimization never spends
+    motion traveling along the symmetry orbit.
+    \item \emph{(The specific symmetry.)} For the deep linear network, the symmetry
+    is $W_1 \mapsto AW_1,\ W_2 \mapsto W_2 A^{-1}$. Take $A = e^{\epsilon M} \approx
+    I + \epsilon M$ for an arbitrary generator matrix $M$, and show that the
+    induced generator is $v = (M W_1,\ -W_2 M)$.
+    \item \emph{(All generators at once.)} Plug this $v$ into the orthogonality
+    condition from (b), substitute $\nabla_{W_1}\Lcal = -\dot W_1$ and
+    $\nabla_{W_2}\Lcal = -\dot W_2$, and use the cyclic property of the trace to
+    rewrite both terms with $M^\top$ pulled to the front. Show the condition
+    becomes
+    \begin{align*}
+        \Tr\!\big(M^\top \dot W_1 W_1^\top\big) = \Tr\!\big(M^\top W_2^\top \dot W_2\big).
+    \end{align*}
+    \item \emph{(Conclude.)} Since this must hold for \emph{every} generator $M$,
+    deduce that $\dot W_1 W_1^\top = W_2^\top \dot W_2$, which is exactly
+    $\frac{d}{dt}(W_2^\top W_2 - W_1 W_1^\top) = 0$. Note where the arbitrariness of
+    $M$ was essential: it is what upgrades a single scalar orthogonality condition
+    into the full matrix-valued conservation law.
+\end{enumerate}
+
+\emph{Remark.} Compare this derivation to the algebra trick. The trick yields
+$\dot W_1 W_1^\top = W_2^\top \dot W_2$ by a fortunate cancellation; here the
+\emph{same} equation appears as the direct consequence of ``the flow is orthogonal
+to every symmetry direction.'' The luck of the trick was the symmetry in disguise
+all along.
+
+% ---------------------------------------------------------------------
+\subsection*{2.3 Alignment collapses the model to its magnitudes.}
+Write the weight SVDs as $W_1 = U_1 S_1 V_1^\top$ and $W_2 = U_2 S_2 V_2^\top$, and
+recall the rotated model $\tilde{W}_2 \tilde{W}_1 = U^{\star\top} W_2 W_1 V^\star$,
+where $\Sigma_{yx} = U^\star \Lambda^\star {V^\star}^\top$. Show that under the
+three weight-alignment conditions,
+\begin{align*}
+    U_2 = U^\star, \qquad V_1 = V^\star, \qquad V_2 = U_1,
+\end{align*}
+the rotated model reduces to the product of magnitude matrices,
+$\tilde{W}_2 \tilde{W}_1 = S_2 S_1$, with all rotation factors canceling. Identify
+which orthogonality relation kills each rotation factor.
+
+% ---------------------------------------------------------------------
+\subsection*{2.4 Solving the scalar learning dynamics.}
+This is the climactic integration of the chapter. The $\mu$-th end-to-end singular
+value obeys the separable ODE
+\begin{align*}
+    \frac{d}{dt}s_\mu^2 = 2 s_\mu^2 (\lambda^\star_\mu - s_\mu^2).
+\end{align*}
+Let $u := s_\mu^2$ for brevity, so that $\dot{u} = 2u(\lambda^\star_\mu - u)$.
+\begin{enumerate}[label=(\alph*)]
+    \item Separate variables and use the partial-fraction identity
+    \begin{align*}
+        \frac{1}{u(\lambda^\star_\mu - u)}
+        = \frac{1}{\lambda^\star_\mu}\left(\frac{1}{u} + \frac{1}{\lambda^\star_\mu - u}\right)
+    \end{align*}
+    to integrate both sides from $0$ to $t$.
+    \item Solve the resulting expression for $u = s_\mu^2(t)$ and confirm you
+    recover the logistic solution
+    \begin{align*}
+        s^2_\mu(t) = \frac{\lambda^\star_\mu}
+        {1 + \left(\dfrac{\lambda^\star_\mu}{s^2_\mu(0)} - 1\right) e^{-2 \lambda^\star_\mu t}}.
+    \end{align*}
+    \item Check the two limits: confirm that $s_\mu^2(t) \to s_\mu^2(0)$ as
+    $t \to 0$ and $s_\mu^2(t) \to \lambda^\star_\mu$ as $t \to \infty$.
+\end{enumerate}
+
+% ---------------------------------------------------------------------
+\subsection*{2.5 Time-to-learn.}
+Using the logistic solution from the previous exercise, derive the halfway-time
+$\tau_\mu$ at which mode $\mu$ reaches half its final strength,
+$s^2_\mu(\tau_\mu) = \tfrac{1}{2}\lambda^\star_\mu$. Show that, dropping order-one
+constants,
+\begin{align*}
+    \tau_\mu \approx \frac{1}{\lambda^\star_\mu} \ln \frac{\lambda^\star_\mu}{s^2_\mu(0)}.
+\end{align*}
+Then argue from this expression that (a) larger modes are learned first, and (b)
+the time-separation between consecutive modes widens as the initialization scale
+$s^2_\mu(0)$ shrinks---the mechanism behind the cleanly separated stairsteps in
+the loss curve.

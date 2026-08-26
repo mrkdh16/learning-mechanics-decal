@@ -13,9 +13,12 @@ nav_order: 2
 - **Time**: TBD
 
 ## Course Description
-*Learning Mechanics* is the emerging discipline that treats deep learning the way physics treats the natural world: seeking compact mathematical principles[^1], tight connections between theory and experiment, and simple, intuitive explanations for complex phenomena. Pieces of a scientific theory for deep learning are beginning to fit together, and in this course, we will examine what has been assembled so far, what remains contested, and where the field is heading.
+Deep learning is in a peculiar situation at this moment in time. Empirically, the capabilities of AI leveraging deep learning (eg. LLMs) have surpassed the expectations of even the most radically optimistic researchers. Publicly available LLMs are [disproving math conjectures](https://x.com/__alpoge__/status/2079028340955197566) left and right, AI is being [injected into every stage of real drug development life cycles](https://icml.cc/virtual/2026/invited-talk/67266), entire [business models have been destroyed](https://tinyurl.com/2hhcsnz7) by improving AI capabilities, and at this point, AI [winning a Nobel Prize](https://www.nobelprize.org/prizes/chemistry/2024/press-release/) is old news. Yet, we lack a comprehensive scientific framework for understanding 
+how exactly these models work and the development of frontier models is closer to alchemy than science.
 
-Deep learning is among the most powerful technologies humans have ever built, and understanding it promises to be one of the defining intellectual challenges of the early 21st century. As of 2026, the engineering success of deep learning has dramatically outpaced our scientific understanding of it. Closing that gap may amount to founding a genuinely new field of science—one whose implications for our understanding of intelligence, data, and learning extend well beyond the neural networks that motivated it.
+Not long ago, engineers built working steam engines before anyone understood the science behind them. The effort to understand and build better engines ended up creating an entirely new branch of science: statistical mechanics. Deep learning may be our generation's steam engine. _Learning mechanics_ is the emerging discipline that aims to understand it from first principles, treating deep learning the way physics treats the natural world: seeking compact mathematical principles, tight connections between theory and experiment, and simple, intuitive explanations for complex phenomena.
+
+This course is for those who want to be part of building that new science.
 
 Readings draw heavily from the perspective paper [_There Will Be a Scientific Theory of Deep Learning_ (Simon et al., 2026)](https://arxiv.org/pdf/2604.21691) and the primary literature it synthesizes.
 
@@ -106,12 +109,14 @@ Each session is 2 hours long. A typical class includes a 50-60 minute lecture on
 
 ### Week 4
 **Lecture 3**. Toy Model I: Deep Linear Networks
+
 *What can we learn about deep learning from a highly mathematically tractable toy model in deep linear networks?* 
 - Readings: [Saxe et al. (2014)](https://arxiv.org/pdf/1312.6120)
 - Lecture Notes: link
 
 ### Week 5 
 **Lecture 4**. Toy Model I: Deep Linear Networks (continued)
+
 *How can we analytically solve for the training dynamics of deep linear networks?*
 - Lecture Notes: link
 - Homework: link
@@ -119,12 +124,14 @@ Each session is 2 hours long. A typical class includes a 50-60 minute lecture on
 ### Week 6 
 **Lecture 5**. Toy Model II: Kernel Regression and the NTK
 Analytically Solvable Settings III: Eigenlearning and the HEA (potential guest lecture)
+
 *Is there a limit in which neural networks become analytically solvable?*
 - Readings: [Lee et al. (2019)](https://arxiv.org/pdf/1902.06720) (optional: [Jacot et al. (2020)](https://arxiv.org/pdf/1806.07572))
 - Lecture Notes: link
 
 ### Week 7 
 **Lecture 6**. Toy Model II: Kernel Regression and the NTK (continued)
+
 *How can we develop a mathematical framework to study kernel regression? Can we predict how kernel regression will perform on real data?*
 - Readings: [Simon et al. (2023)](https://arxiv.org/pdf/2110.03922), [Karkada et al. (2026)](https://arxiv.org/pdf/2510.14878)
 - Lecture Notes: link
@@ -132,12 +139,14 @@ Analytically Solvable Settings III: Eigenlearning and the HEA (potential guest l
 
 ### Week 8 
 **Lecture 7**. The Lazy (NTK) and Rich (muP) Regimes
+
 *In the lazy (NTK) regime, neural networks don't learn any structure. Is there a regime where they do?*
 - Readings: [Yang et al. (2024)](https://arxiv.org/pdf/2310.17813)
 - Lecture Notes: link
 
 ### Week 9 
 **Lecture 8**. The Lazy (NTK) and Rich (muP) Regimes (continued)
+
 *How can we disentangle hyperparameters to maximize feature learning?*
 - Readings: [Yang et al. (2024)](https://arxiv.org/pdf/2310.17813)
 - Lecture Notes: link
@@ -148,6 +157,7 @@ Analytically Solvable Settings III: Eigenlearning and the HEA (potential guest l
 
 ### Week 11
 **Lecture 10**. Case Study I: Grokking
+
 *How can we apply the tools of learning mechanics to understand grokking?*
 - Readings: [Kunin et al. (2024)](https://arxiv.org/pdf/2406.06158v2), [Kumar et al. (2024)](https://arxiv.org/pdf/2310.06110) (optional: [Nanda et al. (2023)](https://arxiv.org/pdf/2301.05217))
 - Lecture Notes: link
@@ -155,6 +165,7 @@ Analytically Solvable Settings III: Eigenlearning and the HEA (potential guest l
 
 ### Week 12
 **Lecture 11**. Case Study II: Representational Geometry
+
 *What kind of features are learned by language models? How might we characterize where such features come from and how they're learned?*
 - Readings: [Karkada et al. (2026)](https://arxiv.org/pdf/2602.15029)
 - Lecture Notes: link

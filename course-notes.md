@@ -6,3 +6,4 @@ nav_order: 3
 
 - <a href="lecture-notes/ch1.pdf" target="_blank">Chapter 1: Introduction to Neural Networks</a>
 - <a href="lecture-notes/ch2.pdf" target="_blank">Chapter 2: Toy Model I, Deep Linear Networks</a>
+- <a href="lecture-notes/ch3.pdf" target="_blank">Chapter 3: Toy Model II, Kernel Regression</a>

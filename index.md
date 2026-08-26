@@ -5,11 +5,16 @@ nav_order: 1
 ---
 
 # Welcome to the Learning Mechanics DeCal!
-*Learning Mechanics* is the emerging discipline that treats deep learning the way physics treats the natural world: seeking compact mathematical principles[^1], tight connections between theory and experiment, and simple, intuitive explanations for complex phenomena. Pieces of a scientific theory for deep learning are beginning to fit together, and in this course, we will examine what has been assembled so far, what remains contested, and where the field is heading.
+Deep learning is in a peculiar situation at this moment in time. Empirically, the capabilities of AI leveraging deep learning (eg. LLMs) have surpassed the expectations of even the most radically optimistic researchers. Publicly available LLMs are [disproving math conjectures](https://x.com/__alpoge__/status/2079028340955197566) left and right, AI is being [injected into every stage of real drug development life cycles](https://icml.cc/virtual/2026/invited-talk/67266), entire [business models have been destroyed](https://tinyurl.com/2hhcsnz7) by improving AI capabilities, and at this point, AI [winning a Nobel Prize](https://www.nobelprize.org/prizes/chemistry/2024/press-release/) is old news. Yet, we lack a comprehensive scientific framework for understanding 
+how exactly these models work and the development of frontier models is closer to alchemy than science.
 
-Deep learning is among the most powerful technologies humans have ever built, and understanding it promises to be one of the defining intellectual challenges of the early 21st century. As of 2026, the engineering success of deep learning has dramatically outpaced our scientific understanding of it. Closing that gap may amount to founding a genuinely new field of science—one whose implications for our understanding of intelligence, data, and learning extend well beyond the neural networks that motivated it.
+Not long ago, engineers built working steam engines before anyone understood the science behind them. The effort to understand and build better engines ended up creating an entirely new branch of science: statistical mechanics. Deep learning may be our generation's steam engine. _Learning mechanics_ is the emerging discipline that aims to understand it from first principles, treating deep learning the way physics treats the natural world: seeking compact mathematical principles, tight connections between theory and experiment, and simple, intuitive explanations for complex phenomena.
 
-Readings draw heavily from the whitepaper <a href="https://arxiv.org/pdf/2604.21691">_There Will Be a Scientific Theory of Deep Learning_ (Simon et al., 2026)</a> and the primary literature it synthesizes.
+This course is for those who want to be part of building that new science.
+
+Readings draw heavily from the perspective paper <a href="https://arxiv.org/pdf/2604.21691">_There Will Be a Scientific Theory of Deep Learning_ (Simon et al., 2026)</a> and the primary literature it synthesizes.
+
+All [lecture notes](course-notes.html) and [problem sets](problem-sets.html) are also linked inline below, next to the week they belong to.
 
 <div class="course-calendar" markdown="0">
   <div class="course-calendar__header">
@@ -58,7 +63,7 @@ Readings draw heavily from the whitepaper <a href="https://arxiv.org/pdf/2604.21
         <div class="cal-week__resources">
           <a class="cal-week__tag cal-week__tag--reading" href="http://neuralnetworksanddeeplearning.com">Reading: Nielsen (2019)</a>
           <a class="cal-week__tag cal-week__tag--notes" href="lecture-notes/ch1.pdf">Lecture Notes</a>
-          <span class="cal-week__tag cal-week__tag--homework">Homework: optional math review</span>
+          <a class="cal-week__tag cal-week__tag--homework" href="problem-sets/ps1.pdf">Homework</a>
         </div>
       </div>
     </div>
@@ -76,7 +81,7 @@ Readings draw heavily from the whitepaper <a href="https://arxiv.org/pdf/2604.21
         </p>
         <div class="cal-week__resources">
           <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/1312.6120">Reading: Saxe et al. (2014)</a>
-          <span class="cal-week__tag cal-week__tag--notes">Lecture Notes</span>
+          <a class="cal-week__tag cal-week__tag--notes" href="lecture-notes/ch2.pdf">Lecture Notes</a>
         </div>
       </div>
     </div>
@@ -93,8 +98,8 @@ Readings draw heavily from the whitepaper <a href="https://arxiv.org/pdf/2604.21
           How can we analytically solve for the training dynamics of deep linear networks?
         </p>
         <div class="cal-week__resources">
-          <span class="cal-week__tag cal-week__tag--notes">Lecture Notes</span>
-          <span class="cal-week__tag cal-week__tag--homework">Homework</span>
+          <a class="cal-week__tag cal-week__tag--notes" href="lecture-notes/ch2.pdf">Lecture Notes</a>
+          <a class="cal-week__tag cal-week__tag--homework" href="problem-sets/ps2.pdf">Homework</a>
         </div>
       </div>
     </div>
@@ -113,7 +118,7 @@ Readings draw heavily from the whitepaper <a href="https://arxiv.org/pdf/2604.21
         <div class="cal-week__resources">
           <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/1902.06720">Reading: Lee et al. (2019)</a>
           <a class="cal-week__tag cal-week__tag--optional" href="https://arxiv.org/pdf/1806.07572">Optional Reading: Jacot et al. (2020)</a>
-          <span class="cal-week__tag cal-week__tag--notes">Lecture Notes</span>
+          <a class="cal-week__tag cal-week__tag--notes" href="lecture-notes/ch3.pdf">Lecture Notes</a>
         </div>
       </div>
     </div>
@@ -132,7 +137,7 @@ Readings draw heavily from the whitepaper <a href="https://arxiv.org/pdf/2604.21
         <div class="cal-week__resources">
           <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/2110.03922">Reading: Simon et al. (2023)</a>
           <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/2510.14878">Reading: Karkada et al. (2026)</a>
-          <span class="cal-week__tag cal-week__tag--notes">Lecture Notes</span>
+          <a class="cal-week__tag cal-week__tag--notes" href="lecture-notes/ch3.pdf">Lecture Notes</a>
           <span class="cal-week__tag cal-week__tag--homework">Homework</span>
         </div>
       </div>

@@ -622,8 +622,7 @@ picture). That's a lot of places for a ball to get stuck. Let's sort them:
     $s_\mu^2 = \lambda^\star_\mu$ for all $\mu$. This is the answer we want.
     \item Exactly \textbf{one} is the master saddle at the origin---every mode
     ignored. It's the \emph{highest-loss} of all the critical points (nothing has
-    been learned yet), and it's a saddle, because, as we saw in Movement 1,
-    stepping away from it along any mode's downhill direction lowers the loss.
+    been learned yet), and it's a saddle because stepping away from it along any mode's downhill direction lowers the loss.
     \item \textbf{Every one of the other $2^k - 2$ stationary points is also a
     saddle.} Suppose the largest mode is fully learned
     ($s_1^2 = \lambda^\star_1$) but the second mode is still untouched
@@ -644,7 +643,7 @@ master saddle at the origin. It starts to roll---but because the weights are tin
 the gradients are tiny too, and it rolls \emph{excruciatingly} slowly. This is the
 source of the very first plateau.
 
-Which way does it go? Recall from Movement 1 that each mode's downhill steepness is
+Which way does it go? Recall that each mode's downhill steepness is
 governed by its singular value $\lambda^\star_\mu$---and in fact, near the origin,
 each mode's strength grows exponentially at a rate set by $\lambda^\star_\mu$
 (this is the power-iteration effect from Step 3). So the ball accelerates down the direction
@@ -661,7 +660,7 @@ sudden steep drop. It settles onto the next ledge, and the waiting game begins
 again for mode 3. Plateau, drop, plateau, drop. This shows up as a staircase loss curve.
 
 It's remarkable that in this toy example, we're able to make a concrete 
-connection between what the network is learning and what the optimization dynamics look like. 
+connection between what the network is learning and what the optimization dynamics look like.
 This can be thought of as an instantiation of the learning mechanics idea that learning, at its core,
 is movement through high dimensional space.
 

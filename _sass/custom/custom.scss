@@ -80,6 +80,15 @@ $off-week-bg: #f8f9fa;
       border-radius: 999px;
       padding: 0.2em 0.55em;
     }
+
+    .week-date {
+      display: block;
+      margin-top: 0.3rem;
+      font-size: 0.65rem;
+      font-weight: 500;
+      color: $text-muted;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
   }
 
   // dot on the spine
@@ -243,6 +252,10 @@ $off-week-bg: #f8f9fa;
     .week-num {
       font-size: 0.6rem;
       padding: 0.15em 0.4em;
+    }
+
+    .week-date {
+      font-size: 0.55rem;
     }
 
     &::after {

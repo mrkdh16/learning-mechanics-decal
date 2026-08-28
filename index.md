@@ -26,7 +26,7 @@ All [lecture notes](course-notes.html) and [problem sets](problem-sets.html) are
 
     <!-- Week 1 ----------------------------------------------------------- -->
     <div class="cal-week cal-week--off">
-      <div class="cal-week__marker"><span class="week-num">Wk 1</span></div>
+      <div class="cal-week__marker"><span class="week-num">Wk 1</span><span class="week-date">Aug 26</span></div>
       <div class="cal-week__card">
         <div class="cal-week__title">First Week &mdash; No Class</div>
       </div>
@@ -34,7 +34,7 @@ All [lecture notes](course-notes.html) and [problem sets](problem-sets.html) are
 
     <!-- Week 2 ----------------------------------------------------------- -->
     <div class="cal-week">
-      <div class="cal-week__marker"><span class="week-num">Wk 2</span></div>
+      <div class="cal-week__marker"><span class="week-num">Wk 2</span><span class="week-date">Sep 2</span></div>
       <div class="cal-week__card">
         <h3 class="cal-week__title">
           <span class="lecture-num">Lecture 1</span>
@@ -51,7 +51,7 @@ All [lecture notes](course-notes.html) and [problem sets](problem-sets.html) are
 
     <!-- Week 3 ----------------------------------------------------------- -->
     <div class="cal-week">
-      <div class="cal-week__marker"><span class="week-num">Wk 3</span></div>
+      <div class="cal-week__marker"><span class="week-num">Wk 3</span><span class="week-date">Sep 9</span></div>
       <div class="cal-week__card">
         <h3 class="cal-week__title">
           <span class="lecture-num">Lecture 2</span>
@@ -70,7 +70,7 @@ All [lecture notes](course-notes.html) and [problem sets](problem-sets.html) are
 
     <!-- Week 4 ----------------------------------------------------------- -->
     <div class="cal-week">
-      <div class="cal-week__marker"><span class="week-num">Wk 4</span></div>
+      <div class="cal-week__marker"><span class="week-num">Wk 4</span><span class="week-date">Sep 16</span></div>
       <div class="cal-week__card">
         <h3 class="cal-week__title">
           <span class="lecture-num">Lecture 3</span>
@@ -88,7 +88,7 @@ All [lecture notes](course-notes.html) and [problem sets](problem-sets.html) are
 
     <!-- Week 5 ----------------------------------------------------------- -->
     <div class="cal-week">
-      <div class="cal-week__marker"><span class="week-num">Wk 5</span></div>
+      <div class="cal-week__marker"><span class="week-num">Wk 5</span><span class="week-date">Sep 23</span></div>
       <div class="cal-week__card">
         <h3 class="cal-week__title">
           <span class="lecture-num">Lecture 4</span>
@@ -106,7 +106,7 @@ All [lecture notes](course-notes.html) and [problem sets](problem-sets.html) are
 
     <!-- Week 6 ----------------------------------------------------------- -->
     <div class="cal-week">
-      <div class="cal-week__marker"><span class="week-num">Wk 6</span></div>
+      <div class="cal-week__marker"><span class="week-num">Wk 6</span><span class="week-date">Sep 30</span></div>
       <div class="cal-week__card">
         <h3 class="cal-week__title">
           <span class="lecture-num">Lecture 5</span>
@@ -125,7 +125,7 @@ All [lecture notes](course-notes.html) and [problem sets](problem-sets.html) are
 
     <!-- Week 7 ----------------------------------------------------------- -->
     <div class="cal-week">
-      <div class="cal-week__marker"><span class="week-num">Wk 7</span></div>
+      <div class="cal-week__marker"><span class="week-num">Wk 7</span><span class="week-date">Oct 7</span></div>
       <div class="cal-week__card">
         <h3 class="cal-week__title">
           <span class="lecture-num">Lecture 6</span>
@@ -145,7 +145,7 @@ All [lecture notes](course-notes.html) and [problem sets](problem-sets.html) are
 
     <!-- Week 8 ----------------------------------------------------------- -->
     <div class="cal-week">
-      <div class="cal-week__marker"><span class="week-num">Wk 8</span></div>
+      <div class="cal-week__marker"><span class="week-num">Wk 8</span><span class="week-date">Oct 14</span></div>
       <div class="cal-week__card">
         <h3 class="cal-week__title">
           <span class="lecture-num">Lecture 7</span>
@@ -163,7 +163,7 @@ All [lecture notes](course-notes.html) and [problem sets](problem-sets.html) are
 
     <!-- Week 9 ----------------------------------------------------------- -->
     <div class="cal-week">
-      <div class="cal-week__marker"><span class="week-num">Wk 9</span></div>
+      <div class="cal-week__marker"><span class="week-num">Wk 9</span><span class="week-date">Oct 21</span></div>
       <div class="cal-week__card">
         <h3 class="cal-week__title">
           <span class="lecture-num">Lecture 8</span>
@@ -181,16 +181,8 @@ All [lecture notes](course-notes.html) and [problem sets](problem-sets.html) are
     </div>
 
     <!-- Week 10 ---------------------------------------------------------- -->
-    <div class="cal-week cal-week--off">
-      <div class="cal-week__marker"><span class="week-num">Wk 10</span></div>
-      <div class="cal-week__card">
-        <div class="cal-week__title">Thanksgiving Break &mdash; No Class</div>
-      </div>
-    </div>
-
-    <!-- Week 11 ---------------------------------------------------------- -->
     <div class="cal-week">
-      <div class="cal-week__marker"><span class="week-num">Wk 11</span></div>
+      <div class="cal-week__marker"><span class="week-num">Wk 10</span><span class="week-date">Oct 28</span></div>
       <div class="cal-week__card">
         <h3 class="cal-week__title">
           <span class="lecture-num">Lecture 10</span>
@@ -209,9 +201,9 @@ All [lecture notes](course-notes.html) and [problem sets](problem-sets.html) are
       </div>
     </div>
 
-    <!-- Week 12 ---------------------------------------------------------- -->
+    <!-- Week 11 ---------------------------------------------------------- -->
     <div class="cal-week">
-      <div class="cal-week__marker"><span class="week-num">Wk 12</span></div>
+      <div class="cal-week__marker"><span class="week-num">Wk 11</span><span class="week-date">Nov 4</span></div>
       <div class="cal-week__card">
         <h3 class="cal-week__title">
           <span class="lecture-num">Lecture 11</span>
@@ -228,17 +220,17 @@ All [lecture notes](course-notes.html) and [problem sets](problem-sets.html) are
       </div>
     </div>
 
-    <!-- Week 13 ---------------------------------------------------------- -->
+    <!-- Week 12 ---------------------------------------------------------- -->
     <div class="cal-week cal-week--off">
-      <div class="cal-week__marker"><span class="week-num">Wk 13</span></div>
+      <div class="cal-week__marker"><span class="week-num">Wk 12</span><span class="week-date">Nov 11</span></div>
       <div class="cal-week__card">
         <div class="cal-week__title">Buffer Week</div>
       </div>
     </div>
 
-    <!-- Week 14 ---------------------------------------------------------- -->
+    <!-- Week 13 ---------------------------------------------------------- -->
     <div class="cal-week">
-      <div class="cal-week__marker"><span class="week-num">Wk 14</span></div>
+      <div class="cal-week__marker"><span class="week-num">Wk 13</span><span class="week-date">Nov 18</span></div>
       <div class="cal-week__card">
         <h3 class="cal-week__title">
           <span class="lecture-num">Lecture 13</span>
@@ -247,9 +239,17 @@ All [lecture notes](course-notes.html) and [problem sets](problem-sets.html) are
       </div>
     </div>
 
+    <!-- Week 14 ---------------------------------------------------------- -->
+    <div class="cal-week cal-week--off">
+      <div class="cal-week__marker"><span class="week-num">Wk 14</span><span class="week-date">Nov 25</span></div>
+      <div class="cal-week__card">
+        <div class="cal-week__title">Thanksgiving Break &mdash; No Class</div>
+      </div>
+    </div>
+
     <!-- Week 15 ---------------------------------------------------------- -->
     <div class="cal-week">
-      <div class="cal-week__marker"><span class="week-num">Wk 15</span></div>
+      <div class="cal-week__marker"><span class="week-num">Wk 15</span><span class="week-date">Dec 2</span></div>
       <div class="cal-week__card">
         <h3 class="cal-week__title">
           <span class="lecture-num">Lecture 14</span>
@@ -260,7 +260,7 @@ All [lecture notes](course-notes.html) and [problem sets](problem-sets.html) are
 
     <!-- Week 16 ---------------------------------------------------------- -->
     <div class="cal-week cal-week--off">
-      <div class="cal-week__marker"><span class="week-num">Wk 16</span></div>
+      <div class="cal-week__marker"><span class="week-num">Wk 16</span><span class="week-date">Dec 9</span></div>
       <div class="cal-week__card">
         <div class="cal-week__title">RRR Week &mdash; No Class</div>
       </div>

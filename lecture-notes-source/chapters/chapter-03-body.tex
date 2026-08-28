@@ -103,7 +103,7 @@ In chapters 1 and 2, we mostly thought about networks' weight space dynamics; i.
 how the weights $\theta$ traverse the loss landscape according to gradient flow:
 
 \begin{align}
-\dot{\theta}^{(t)} = -\eta\nabla_{\theta} \mathcal{L}(\theta^{(t)}).
+\dot{\theta}^{(t)} = -\nabla_{\theta} \mathcal{L}(\theta^{(t)}).
 \end{align}
 
 However, at the end of the day, the only reason we care about the dynamics of
@@ -141,8 +141,8 @@ Now apply the chain rule to see how the predictions move:
 \begin{align}
 \dot{\hat{f}}^{(t)}(X)
 = J^{(t)}\dot{\theta}^{(t)}
-= -\eta J^{(t)} \nabla_{\theta}\mathcal{L}
-= -\eta \underbrace{J^{(t)} {J^{(t)}}^{\top}}_{=:K^{(t)}}
+= - J^{(t)} \nabla_{\theta}\mathcal{L}
+= - \underbrace{J^{(t)} {J^{(t)}}^{\top}}_{=:K^{(t)}}
 \nabla_{\hat{f}(X)}\mathcal{L}\left(\hat{f}^{(t)}(X)\right),
 \label{ch3-ntk-v2}
 \end{align}
@@ -168,15 +168,16 @@ nothing about the architecture; every neural network trained by gradient flow ob
 flow was used only to get a clean ODE, and the definition of $K^{(t)}$ itself is perfectly sound
 under discrete gradient descent.
 
-\subsubsection{Linear regression revisited}
+\subsubsection{Neural networks do a generalized version of linear regression}
+\label{nn-lr}
 
 Take a hard look at Equation~\eqref{ch3-ntk-v2}. Hopefully it looks familiar. It is almost exactly the
 differential equation for overparameterized linear regression from chapter 1:
 
 \begin{align}
 \dot{\hat{f}}^{(t)}_{\text{linreg}}(X) = X\dot{w}^{(t)}
-&= -\eta X X^\top\left(Xw^{(t)}-y\right) \\
-&= -\eta X X^\top \nabla_{\hat{f}_{\text{linreg}}(X)}
+&= - X X^\top\left(Xw^{(t)}-y\right) \\
+&= - X X^\top \nabla_{\hat{f}_{\text{linreg}}(X)}
 \mathcal{L}\left(\hat{f}_{\text{linreg}}^{(t)}(X)\right).
 \end{align}
 
@@ -234,18 +235,18 @@ $J_{\text{lin}}^{(t)} = J^{(0)}$, its kernel is the constant matrix
 $K^{(0)} = J^{(0)}{J^{(0)}}^\top$, and Equation~\eqref{ch3-ntk-v2} becomes
 
 \begin{align}
-\dot{\hat{f}}^{(t)}_{\text{lin}}(X) = 2\eta K^{(0)} r^{(t)}
+\dot{\hat{f}}^{(t)}_{\text{lin}}(X) = 2 K^{(0)} r^{(t)}
 \qquad\implies\qquad
-\dot{r}^{(t)} = -2\eta K^{(0)} r^{(t)},
+\dot{r}^{(t)} = -2 K^{(0)} r^{(t)},
 \end{align}
 
 which is the same first order homogeneous linear ODE we met in chapter 1,
 with $XX^\top$ replaced by $K^{(0)}$. Its solution is
 
 \begin{align}
-r^{(t)} = e^{-2\eta K^{(0)} t}\, r^{(0)},
+r^{(t)} = e^{-2 K^{(0)} t}\, r^{(0)},
 \qquad\text{i.e.,}\qquad
-\hat{f}^{(t)}_{\text{lin}}(X) = y - e^{-2\eta K^{(0)} t}\left(y-\hat{f}^{(0)}(X)\right).
+\hat{f}^{(t)}_{\text{lin}}(X) = y - e^{-2 K^{(0)} t}\left(y-\hat{f}^{(0)}(X)\right).
 \label{ch3-fn-space-soln}
 \end{align}
 
@@ -256,12 +257,12 @@ independent, and generically true for wide networks with $M\gg P$),
 the residual decays exponentially to zero and the network interpolates the training data.
 
 If we want the weights too, we can integrate exactly as before. In weight space
-$\dot{\theta}^{(t)} = -\eta\nabla_\theta\mathcal{L} = 2\eta {J^{(0)}}^\top r^{(t)}$, so
+$\dot{\theta}^{(t)} = -\nabla_\theta\mathcal{L} = 2 {J^{(0)}}^\top r^{(t)}$, so
 
 \begin{align}
 \theta^{(t)}-\theta^{(0)}
-&= 2\eta {J^{(0)}}^\top\left(\int^t_0 e^{-2\eta K^{(0)}s}\,ds\right) r^{(0)} \\
-&= {J^{(0)}}^\top \left(K^{(0)}\right)^{-1}\left(I_P - e^{-2\eta K^{(0)}t}\right)
+&= 2 {J^{(0)}}^\top\left(\int^t_0 e^{-2 K^{(0)}s}\,ds\right) r^{(0)} \\
+&= {J^{(0)}}^\top \left(K^{(0)}\right)^{-1}\left(I_P - e^{-2 K^{(0)}t}\right)
 \left(y - \hat{f}^{(0)}(X)\right),
 \end{align}
 
@@ -276,13 +277,13 @@ training is lazy: the network moves as little as it can get away with.
 
 Finally, we usually care about predictions on data we have not trained on. Feeding the
 above into the linearization at an arbitrary test point $x$ and writing
-$K^{(0)}(x,X)\in\mathbb{R}^{1\times P}$ for the row vector with entries
+$k^{\top}(x)\in\mathbb{R}^{1\times P}$ for the row vector with entries
 $\langle\phi^{(0)}(x),\phi^{(0)}(x_i)\rangle$,
 
 \begin{align}
 \hat{f}^{(t)}_{\text{lin}}(x)
-= \hat{f}^{(0)}(x) + K^{(0)}(x,X)\left(K^{(0)}\right)^{-1}
-\left(I_P - e^{-2\eta K^{(0)}t}\right)\left(y-\hat{f}^{(0)}(X)\right),
+= \hat{f}^{(0)}(x) + k^{\top}(x)\left(K^{(0)}\right)^{-1}
+\left(I_P - e^{-2 K^{(0)}t}\right)\left(y-\hat{f}^{(0)}(X)\right),
 \end{align}
 
 and at convergence,
@@ -290,7 +291,7 @@ and at convergence,
 \begin{align}
 \hat{f}^{(\infty)}_{\text{lin}}(x)
 = \underbrace{\hat{f}^{(0)}(x)}_{\text{random init. function}}
-+\ \underbrace{K^{(0)}(x,X)\left(K^{(0)}\right)^{-1}
++\ \underbrace{k^{\top}(x)\left(K^{(0)}\right)^{-1}
 \left(y-\hat{f}^{(0)}(X)\right)}_{\text{kernel regression on the residual labels}}.
 \label{ch3-kernel-regression}
 \end{align}
@@ -307,22 +308,13 @@ $K^{(0)}$ is symmetric PSD, we may diagonalize it as $K^{(0)} = \sum_i \lambda_i
 and decompose the residual along its eigenbasis. Each component then decays independently,
 
 \begin{align}
-\langle v_i, r^{(t)}\rangle = e^{-2\eta\lambda_i t}\langle v_i, r^{(0)}\rangle,
+\langle v_i, r^{(t)}\rangle = e^{-2\lambda_i t}\langle v_i, r^{(0)}\rangle,
 \end{align}
 
 so the network learns the top eigendirections of its kernel first and the bottom ones
 exponentially more slowly. The NTK spectrum tells us, before training begins, which
 functions the network finds easy and which it finds hard.
 
-\begin{align}
-\dot{\hat{f}}^{(t)}(X)
-&= \eta K (y-\hat{f}^{(t)}(X)) \\
-\implies \dot{\hat{f}}^{(t)}(X) 
-&= \eta K e^{-\eta K t}(y-{\hat{f}}^{(0)}(X)) \\
-\hat{f}^{(T)}(X) - \hat{f}^{(0)}(X) &= \int^T_0 \left[\eta K e^{-\eta K t}(y-\hat{f}^{(0)}(X)) \right]dt \\
-&= 2X^\top \left(\int^T_0 e^{-2XX^\top t}dt \right)(y-Xw_0).\\
-\lim_{T\to \infty} w(T) = X^\top(XX^\top)^{-1}y =:w^*.
-\end{align}
 
  But before we go on to study kernel regression, let's return
 to the problem at hand: showing that $1/\sqrt{H}$ scaling actually yields lazy training.
@@ -356,7 +348,7 @@ turned the CLT-scaled sum into an LLN-scaled average. Thus, the law of large num
 random matrix $K^{(0)}$ converges to a deterministic limit:
 
 \begin{align}
-K^{\infty}(x,x') = \mathbb{E}_{w}\left[\sigma(w^\top x)\sigma(w^\top x')\right]
+K(x,x') = \mathbb{E}_{w}\left[\sigma(w^\top x)\sigma(w^\top x')\right]
 + (x^\top x')\,\mathbb{E}_{w}\left[\sigma'(w^\top x)\sigma'(w^\top x')\right],
 \end{align}
 
@@ -365,8 +357,8 @@ This object is a deterministic function of the architecture, the nonlinearity, a
 initialization distribution, with no dependence on any particular draw of the weights.
 This object is the \textit{analytical} NTK\footnote{Also called the limiting or infinite-width NTK. Terminology in the
 literature is not consistent: ``the NTK'' sometimes means $K^\infty$ and sometimes means $K^{(t)}$
-at finite width. We will always write $K^{(t)}$ for the empirical kernel and $K^\infty$ for the
-analytical one.}. The width shows up only in how far $K^{(0)}$ strays from it, and the CLT tells us
+at finite width. We will always write $K^{(t)}$ for the empirical kernel and $K$ for the
+analytical one.}. The width shows up only in how far $K$ strays from it, and the CLT tells us
 those fluctuations are $\mathcal{O}(1/\sqrt{H})$.
 
 Concentration at initialization is only half of what we need; the kernel could still drift once
@@ -412,42 +404,74 @@ Let's talk about it.
 \subsection{On generalization and inductive biases}
 
 Recall the setup for a standard supervised learning task. We are given training data consisting of
-$P$ pairs of data points $\{ (x_{i}, y_{i}) \}_{i=1}^P$ where the inputs $x$ are sampled (usually assumed i.i.d.) from some data distribution $x\sim \mathcal{D}$, and
-the outputs $y$ are generated by some target function $y=f^*(x)$.
-We learn a model $\hat{f}(x)$ such that $\hat{f}(x_{i}) \approx f^*(x_i) = y_{i}$ 
-for all $i = 1,\cdots, P$ and hope that it agrees with $f^*(x)$ on the entire data distribution $\mathcal{D}$.
+$P$ pairs of data points $\{ (x_{i}, y_{i}) \}_{i=1}^P$ where the inputs $x$ are sampled (usually assumed i.i.d.) from some data distribution $x\sim \rho$, and
+the outputs $y$ are generated by some target function plus irreducible noise\footnote{We didn't consider irreducible noise in chapter 1, but it will be useful to consider it here.} $y=f^*(x)+\varepsilon$ (we usually assume $\varepsilon\sim N(0,\sigma^2)$).
+We want to learn a model $\hat{f}(x)$ that ignores the noise---$\hat{f}(x_{i}) \approx f^*(x_i)$
+for all $i = 1,\cdots, P$---and agrees with $f^*(x)$ on the entire data distribution $\rho$.
+ 
+We will consider two distinct complications in learning a generalizing function.
+There certainly exist more complications but we consider these two for now.
+Firstly, the training labels contain irreducible noise, so simply driving training error to zero is not necessarily the goal (even if it ends up happening during training). We don't want the model to memorize noise. Ideally, the model should extract just the target function $f^*(x)$ and ignore the noise. Secondly, even if we restrict to functions that get the noise-free targets right on the training set---$\hat{f}(x_{i}) \approx f^*(x_i)$ for all $i = 1,\cdots, P$---there are enormously many such functions, and only a vanishing fraction of them agree with $f^*$ off the training set. These two complications are largely independent. And the canonical term for them are \textit{bias} and \textit{variance}.
+ 
+\subsection*{The bias-variance decomposition}
 
-The space of all functions that fit the $P$ training points well
-is enormous. So, to ensure that the model learns something that actually 
-generalizes to the entire data distribution $\mathcal{D}$, we might consider
+Fix a test point $x\sim \rho$, drawn independently of the training set $\Dcal$ (recall $\Dcal$ bundles both the sampled inputs $x_1,\dots,x_P$ and the sampled noise $\varepsilon_1,\dots,\varepsilon_P$). The learned predictor $\hat f$ is a random function of $\Dcal$: different draws of $\Dcal$ give different $\hat f$. Define the \emph{expected predictor}
+\[
+\bar f(x) \;\equiv\; \mathbb{E}_{\Dcal}[\hat f(x)],
+\]
+i.e.\ the function you would get by retraining on infinitely many independent datasets and averaging the resulting predictions pointwise.
+
+Adding and subtracting $\bar f(x)$ inside the squared test error and taking $\mathbb{E}_\Dcal$, the cross term vanishes exactly---by definition $\bar f$ \emph{is} the $\Dcal$-average of $\hat f$, so no approximation is involved. Averaging that pointwise split over $x\sim \rho$ and adding back the irreducible label noise $\sigma^2$ (independent of both $x$ and $\Dcal$) then gives an exact decomposition of the test risk:
+\begin{equation}
+\mathcal{E}(f) \;\equiv\; \mathbb{E}_{\Dcal}\Big[\mathbb{E}_{x\sim \rho}\big[(f(x)-\hat f(x))^2\big]\Big] + \sigma^2
+\;=\; \underbrace{\|f - \bar f\|^2 + \sigma^2}_{\text{bias } B(f)} \;+\; \underbrace{\mathbb{E}_{\Dcal}\big[\|\hat f - \bar f\|^2\big]}_{\text{variance } V(f)},
+\label{eq:bv-final}
+\end{equation}
+where $\|g\|^2 \equiv \mathbb{E}_{x\sim \rho}[g(x)^2]$. Working through this split step by step is left as an exercise for the reader.
+ 
+$B(f)$ is what's left over even after averaging away all training-set randomness --- it measures whether the model's inductive bias is well matched to $f^*$, i.e.\ exactly our second complication (agreement with $f^*$ on all of $\Dcal$). $V(f)$ measures how much $\hat f$ fluctuates from one draw of $\Dcal$ (and one noise realization) to another --- i.e.\ how sensitive the learned function is to the particular noise it happened to see, which is exactly our first complication (memorizing noise), restated in decision-theoretic language. A model can have low bias and high variance (it fits a spurious-but-noise-sensitive pattern that happens to average out to $f^*$), or high bias and low variance (it robustly ignores noise but converges to the wrong function) --- so the two really are separate failure modes, not two names for the same thing.
+ 
+\bigskip
+\textit{On the ``bias-variance tradeoff is outdated'' take.} What's often called outdated isn't the decomposition above --- that's an exact algebraic identity, true unconditionally (Exercise 3.1). What's outdated is the classical \emph{monotonic} picture layered on top of it: the textbook story that as model capacity grows, bias falls and variance rises monotonically, producing a single U-shaped risk curve with one sweet spot in the middle. Double descent is precisely a violation of that monotonicity, not of the decomposition itself --- variance can \emph{spike} at some intermediate capacity and then \emph{fall} again past the interpolation threshold, all while bias keeps monotonically improving. We'll see this exactly when we get to the eigenlearning framework: test risk splits as $\mathcal{E}(f) = B(f) + V(f)$ with $V(f) = \frac{E_0-1}{E_0}\mathcal{E}(f)$, where $E_0 \geq 1$ is an ``overfitting coefficient'' that can blow up non-monotonically at spectral cutoffs in the kernel --- giving a rigorous, closed-form account of exactly the kind of non-monotonic variance behavior that broke the classical intuition.
+ 
+\bigskip
+The solution to both of the above concerns is to consider
 using a combination of architecture, learning rule, and loss
 that has an \textit{inductive bias}\footnote{
-    The min-norm bias of overparameterized linear regression from chapter 1 and 
+    The min-norm bias of overparameterized linear regression from chapter 1 and
     the greedy (larger singular value modes learned first) bias of deep linear networks from chapter 2
     are simple examples of inductive biases.
-} 
+}
 toward learning a simple, well-generalizing function. While characterizing the inductive biases
 of neural networks in general is incredibly difficult, doing so for networks specifically in the lazy regime
 is not, as it directly relates to the frozen NTK determined at initialization.
-We'll find that different architectures have different inductive biases that 
+We'll find that different architectures have different inductive biases that
 determine how easy or hard it is to learn a particular target function.
 We'll also learn about once mysterious deep learning phenomena such as double descent
 and benign overfitting.
 
 \subsection{Eigenlearning}
 
-Consider an arbitrary data point $x\sim\mathcal{D}$ drawn from the data distribution. 
-Consider the evolution of the prediction
-$\hat{f}(x)$ throughout training:
-
-\begin{align}
-\dot{\hat{f}}^{(t)}(x) = \frac{\partial \hat{f}^{(t)}(x_0)}{\partial \theta}\dot{\theta} 
-= -\eta \underbrace{\frac{\partial \hat{f}^{(t)}(x_0)}{\partial \theta} {J^{(t)}}^\top}_{=: k^\top(x)} \nabla_{\hat{f}(X)}\mathcal{L}\left(\hat{f}^{(t)}(X)\right)
-\end{align}
+In general, the connection between performance on the training set and performance on the entire data distribution (i.e., performance on a test set in practice) is, mathematically speaking, highly nontrivial. Kernel regression is a special case. In the case of kernel regression, the insight comes from math; specifically, Mercer's theorem. It provides a mathematical link between the finite spectral decomposition of the empirical NTK ($K^{(0)}$) and the infinite-dimensional, functional decomposition of the analytical NTK ($K$). This connection allows us to reason about generalization performance using performance during training. Another way to think about this is that kernel regression has an obvious, mathematically tractable inductive bias.
 
 \textcolor{blue}{THOUGHT.} the utility of having a frozen kernel comes from the fact that
 the kernel is determined at init. this allows us to use RMT/stat-mechy arguments to think
 about model predictions and generalization.
+
+Consider an arbitrary data point $x\sim \rho$ drawn from the data distribution.
+We worked out the evolution of the prediction $\hat{f}(x)$ throughout training in Section~\ref{nn-lr} (Equation~\eqref{ch3-kernel-regression}):
+
+\begin{align}
+\dot{\hat{f}}^{(t)}(x) = \frac{\partial \hat{f}^{(t)}(x_0)}{\partial \theta}\dot{\theta} 
+&= - \underbrace{\frac{\partial \hat{f}^{(t)}(x_0)}{\partial \theta} {J^{(t)}}^\top}_{=: k^\top(x)} \nabla_{\hat{f}(X)}\mathcal{L}\left(\hat{f}^{(t)}(X)\right) \\
+&=\hat{f}^{(0)}(x)+ k^\top(x)(K^{(0)})^{-1}(y-\hat{f}^{(0)}(X)).
+\end{align}
+
+We'll assume initialization at zero ($\hat{f}^{(0)}(x)=0$) for a cleaner expression:
+
+\begin{align}
+    \dot{\hat{f}}^{(t)}(x) =  k^\top(x)(K^{(0)})^{-1}y.
+\end{align}
 
 \section{Why lazy learning is bad}
 

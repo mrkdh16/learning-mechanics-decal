@@ -1,0 +1,50 @@
+\section*{Chapter 3 Exercises}
+
+% ---------------------------------------------------------------------
+\subsection*{3.1 The bias-variance decomposition.}
+In the body we asserted, without fully showing the algebra, that the test risk
+splits exactly into a bias term and a variance term. This exercise fills in
+that calculation.
+
+Setup: a test point $x\sim \rho$ is drawn independently of the training set
+$\Dcal$, where $\Dcal$ bundles both the sampled inputs $x_1,\dots,x_P$ and the
+sampled noise $\varepsilon_1,\dots,\varepsilon_P$ (recall $y = f^*(x)+\varepsilon$ with
+$\varepsilon\sim N(0,\sigma^2)$). The learned predictor $\hat f$ is a random
+function of $\Dcal$, and we define the expected predictor $\bar f(x) \equiv
+\mathbb{E}_{\Dcal}[\hat f(x)]$.
+
+\begin{enumerate}[label=\alph*)]
+    \item For a fixed test point $x$ and a fixed draw of $\Dcal$, add and
+    subtract $\bar f(x)$ to write
+    \[
+    f(x) - \hat f(x) = \big(f(x) - \bar f(x)\big) - \big(\hat f(x) - \bar f(x)\big).
+    \]
+    Square both sides and take $\mathbb{E}_{\Dcal}$ with $x$ held fixed. Show
+    that the cross term vanishes using nothing more than the definition of
+    $\bar f$, leaving
+    \[
+    \mathbb{E}_{\Dcal}\big[(f(x)-\hat f(x))^2\big]
+    = \big(f(x)-\bar f(x)\big)^2 + \mathbb{E}_{\Dcal}\big[(\hat f(x)-\bar f(x))^2\big].
+    \]
+    \item Now average the identity from part (a) over the test point
+    $x\sim \rho$ and add back the irreducible noise floor $\sigma^2$:
+    \[
+    \mathcal{E}(f) \;\equiv\; \mathbb{E}_{\Dcal}\Big[\mathbb{E}_{x\sim \rho}\big[(f(x)-\hat f(x))^2\big]\Big] + \sigma^2.
+    \]
+    Using Fubini's theorem (justified since $x \perp \Dcal$) to swap the order
+    of the two expectations, show
+    \[
+    \mathcal{E}(f) = \underbrace{\mathbb{E}_{x\sim \rho}\big[(f(x)-\bar f(x))^2\big] + \sigma^2}_{B(f)}
+    \;+\; \underbrace{\mathbb{E}_{x\sim \rho}\Big[\mathbb{E}_{\Dcal}\big[(\hat f(x)-\bar f(x))^2\big]\Big]}_{V(f)}.
+    \]
+    \item Show that $V(f)$ can equivalently be written with the expectations
+    in the other order, $V(f) = \mathbb{E}_{\Dcal}\big[\|\hat f - \bar f\|^2\big]$,
+    where $\|g\|^2 \equiv \mathbb{E}_{x\sim \rho}[g(x)^2]$. In one sentence each,
+    say what the two orderings emphasize: ``variance at a point, averaged over
+    points'' versus ``deviation of the whole function, averaged over
+    datasets.''
+    \item In two or three sentences, explain why $B(f)$ measures whether the
+    model's inductive bias is well matched to $f^*$, while $V(f)$ measures how
+    sensitive the learned function is to the particular dataset (and noise
+    realization) it happened to see.
+\end{enumerate}

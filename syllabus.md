@@ -9,8 +9,8 @@ nav_order: 2
 - **Instructor**: Mark Rhee
 - **Email**: mrkdh@berkeley.edu
 - **Faculty Sponsor**: Michael DeWeese
-- **Location**: TBD
-- **Time**: TBD
+- **Location**: Physics Building 251
+- **Time**: Wednesdays, 6&ndash;8pm
 
 ## Course Description
 Deep learning is in a peculiar situation at this moment in time. Empirically, the capabilities of AI leveraging deep learning (eg. LLMs) have surpassed the expectations of even the most radically optimistic researchers. Publicly available LLMs are [disproving math conjectures](https://x.com/__alpoge__/status/2079028340955197566) left and right, AI is being [injected into every stage of real drug development life cycles](https://icml.cc/virtual/2026/invited-talk/67266), entire [business models have been destroyed](https://tinyurl.com/2hhcsnz7) by improving AI capabilities, and at this point, AI [winning a Nobel Prize](https://www.nobelprize.org/prizes/chemistry/2024/press-release/) is old news. Yet, we lack a comprehensive scientific framework for understanding 

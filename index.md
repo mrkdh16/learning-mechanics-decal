@@ -14,7 +14,7 @@ This course is for those who want to be part of building that new science.
 
 Readings draw heavily from the perspective paper <a href="https://arxiv.org/pdf/2604.21691">_There Will Be a Scientific Theory of Deep Learning_ (Simon et al., 2026)</a> and the primary literature it synthesizes.
 
-All [lecture notes](course-notes.html) and [problem sets](problem-sets.html) are also linked inline below, next to the week they belong to.
+All [lecture notes](course-notes.html) and [homework](problem-sets.html) are also linked inline below, next to the week they belong to.
 
 <div class="course-calendar" markdown="0">
   <div class="course-calendar__header">
@@ -45,6 +45,7 @@ All [lecture notes](course-notes.html) and [problem sets](problem-sets.html) are
         </p>
         <div class="cal-week__resources">
           <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/2604.21691">Reading: Simon et al. (2026)</a>
+          <a class="cal-week__tag cal-week__tag--reading-q" href="https://docs.google.com/forms/d/e/1FAIpQLSdxmAe4dqHV26jDM7UiSWOU30WLIsgPNhhUo5TO-vGOZiR7Fg/viewform?usp=header" target="_blank">Pre-Semester Survey</a>
         </div>
       </div>
     </div>
@@ -62,6 +63,7 @@ All [lecture notes](course-notes.html) and [problem sets](problem-sets.html) are
         </p>
         <div class="cal-week__resources">
           <a class="cal-week__tag cal-week__tag--reading" href="http://neuralnetworksanddeeplearning.com">Reading: Nielsen (2019)</a>
+          <a class="cal-week__tag cal-week__tag--reading-q" href="https://docs.google.com/forms/d/e/1FAIpQLSd-XSV_Wll4IonOXK-dmwT3RqUgmapmEEPuwdXb5e3GMSNL9g/viewform?usp=header" target="_blank">Reading Questions</a>
           <a class="cal-week__tag cal-week__tag--notes" href="lecture-notes/ch1.pdf">Lecture Notes</a>
           <a class="cal-week__tag cal-week__tag--homework" href="problem-sets/ps1.pdf">Homework</a>
         </div>

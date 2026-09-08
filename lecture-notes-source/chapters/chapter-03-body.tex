@@ -254,26 +254,7 @@ Equation~\eqref{ch3-fn-space-soln} is the entire training trajectory of the
 network's predictions on the training set, in closed form, for all $t\geq 0$.
 Assuming $K^{(0)}$ is positive definite (the analogue of assuming the rows of $X$ are linearly
 independent, and generically true for wide networks with $M\gg P$),
-the residual decays exponentially to zero and the network interpolates the training data.
-
-If we want the weights too, we can integrate exactly as before. In weight space
-$\dot{\theta}^{(t)} = -\nabla_\theta\mathcal{L} = 2 {J^{(0)}}^\top r^{(t)}$, so
-
-\begin{align}
-\theta^{(t)}-\theta^{(0)}
-&= 2 {J^{(0)}}^\top\left(\int^t_0 e^{-2 K^{(0)}s}\,ds\right) r^{(0)} \\
-&= {J^{(0)}}^\top \left(K^{(0)}\right)^{-1}\left(I_P - e^{-2 K^{(0)}t}\right)
-\left(y - \hat{f}^{(0)}(X)\right),
-\end{align}
-
-which is Equation~\eqref{linreg} verbatim under the substitution
-$X\to J^{(0)}$, $w\to\theta$. The implicit regularization story carries over as well:
-as $t\to\infty$ the weight displacement lies entirely in the row space of $J^{(0)}$,
-so among all weight vectors that interpolate the data, gradient flow finds the one
-minimizing $\|\theta-\theta^{(0)}\|$. Note the shift in reference point---in chapter 1
-we needed $w_0 = 0$ to get a minimum-norm solution, whereas here the bias is toward
-\textit{initialization} rather than the origin. This is exactly the sense in which lazy
-training is lazy: the network moves as little as it can get away with.
+the residual decays exponentially to zero and the network interpolates (i.e., achieves zero loss on) the training data.
 
 Finally, we usually care about predictions on data we have not trained on. Feeding the
 above into the linearization at an arbitrary test point $x$ and writing
@@ -294,6 +275,29 @@ and at convergence,
 +\ \underbrace{k^{\top}(x)\left(K^{(0)}\right)^{-1}
 \left(y-\hat{f}^{(0)}(X)\right)}_{\text{kernel regression on the residual labels}}.
 \label{ch3-kernel-regression}
+\end{align}
+
+Here's the same result again, via a chain rule intuition. Consider an
+arbitrary data point $x\sim \rho$ drawn from the data distribution. Since
+$\hat{f}^{(t)}(x)$ depends on $t$ only through $\theta^{(t)}$, the chain rule
+gives
+
+\begin{align}
+\dot{\hat{f}}^{(t)}(x) = \frac{\partial \hat{f}^{(t)}(x)}{\partial \theta}\dot{\theta}^{(t)}
+= - \underbrace{\frac{\partial \hat{f}^{(t)}(x)}{\partial \theta} {J^{(t)}}^\top}_{=: k^\top(x)} \nabla_{\hat{f}(X)}\mathcal{L}\left(\hat{f}^{(t)}(X)\right),
+\end{align}
+
+which integrates, exactly as before, to
+
+\begin{align}
+{\hat{f}}^{(\infty)}(x) =\hat{f}^{(0)}(x)+ k^\top(x)(K^{(0)})^{-1}(y-\hat{f}^{(0)}(X)).
+\end{align}
+
+We'll assume initialization at zero ($\hat{f}^{(0)}(x)=0$) for a cleaner expression:
+
+\begin{align}
+    {\hat{f}}^{(\infty)}(x) =  k^\top(x)(K^{(0)})^{-1}y.
+    \label{ch3-kernel-regression-clean}
 \end{align}
 
 Equation~\eqref{ch3-kernel-regression} is the punchline of the lazy regime. Up to the
@@ -359,7 +363,7 @@ This object is the \textit{analytical} NTK\footnote{Also called the limiting or 
 literature is not consistent: ``the NTK'' sometimes means $K^\infty$ and sometimes means $K^{(t)}$
 at finite width. We will always write $K^{(t)}$ for the empirical kernel and $K$ for the
 analytical one.}. The width shows up only in how far $K$ strays from it, and the CLT tells us
-those fluctuations are $\mathcal{O}(1/\sqrt{H})$.
+those fluctuations are $\mathcal{O}(1/\sqrt{H})$. In the infinite-width limit, the empirical kernel $K^{(0)}$ is a finite, random sample of the analytical kernel $K$, where the randomness comes from the fact that the training data $\mathcal{D}$ is a random sample of the data distribution $\rho$.
 
 Concentration at initialization is only half of what we need; the kernel could still drift once
 training starts. The following is an intuitive explanation for why it doesn't. Under CLT scaling, the gradient
@@ -394,7 +398,10 @@ The handwavey intuition given in the past few paragraphs can be made rigorous as
 mathematical proof. Lee et al. (2019)\footnote{https://arxiv.org/pdf/1902.06720} do exactly that
 in appendix G of their paper titled "Wide Neural Networks of Any Depth Evolve as Linear Models Under Gradient Descent."
 But for our purposes, the handwavey intuition shall suffice.
-\section{Kernel regression}
+
+The technical upshot of this section is that with $\frac{1}{\sqrt{H}}$ scaling and standard Gaussian initialization of the weights, the neural tangent kernel stays fixed throughout training. A fixed NTK forces the neural network to evolve linearly with respect to its parameters, and this simple linear evolution is linear regression in some fixed projection-space---which means its exactly solvable.
+
+\section{Eigenlearning}
 
 In this section, we will learn about \textit{Eigenlearning}: a theoretical framework
 for understanding \textit{generalization} in kernel regression.
@@ -406,12 +413,8 @@ Let's talk about it.
 Recall the setup for a standard supervised learning task. We are given training data consisting of
 $P$ pairs of data points $\{ (x_{i}, y_{i}) \}_{i=1}^P$ where the inputs $x$ are sampled (usually assumed i.i.d.) from some data distribution $x\sim \rho$, and
 the outputs $y$ are generated by some target function plus irreducible noise\footnote{We didn't consider irreducible noise in chapter 1, but it will be useful to consider it here.} $y=f^*(x)+\varepsilon$ (we usually assume $\varepsilon\sim N(0,\sigma^2)$).
-We want to learn a model $\hat{f}(x)$ that ignores the noise---$\hat{f}(x_{i}) \approx f^*(x_i)$
-for all $i = 1,\cdots, P$---and agrees with $f^*(x)$ on the entire data distribution $\rho$.
- 
-We will consider two distinct complications in learning a generalizing function.
-There certainly exist more complications but we consider these two for now.
-Firstly, the training labels contain irreducible noise, so simply driving training error to zero is not necessarily the goal (even if it ends up happening during training). We don't want the model to memorize noise. Ideally, the model should extract just the target function $f^*(x)$ and ignore the noise. Secondly, even if we restrict to functions that get the noise-free targets right on the training set---$\hat{f}(x_{i}) \approx f^*(x_i)$ for all $i = 1,\cdots, P$---there are enormously many such functions, and only a vanishing fraction of them agree with $f^*$ off the training set. These two complications are largely independent. And the canonical term for them are \textit{bias} and \textit{variance}.
+We want to learn a model $\hat{f}(x)$ that 1) ignores the noise---$\hat{f}(x_{i}) \approx f^*(x_i)$
+for all $i = 1,\cdots, P$---and 2) agrees with $f^*(x)$ on the entire data distribution $\rho$. These two concerns regarding generalization are largely distinct. The first concern has to do with the fact that the training labels contain irreducible noise. This means that simply driving training error to zero is not necessarily the goal, since we don't want the model to memorize noise. Ideally, the model should extract just the target function $f^*(x)$ and ignore the noise. The second concern has to do with the fact that even if we restrict to functions that get the noise-free targets right on the training set---$\hat{f}(x_{i}) \approx f^*(x_i)$ for all $i = 1,\cdots, P$---there are enormously many such functions, and only a vanishing fraction of them agree with $f^*$ off the training set. The canonical term for these two complications are \textit{variance} and \textit{bias}.
  
 \subsection*{The bias-variance decomposition}
 
@@ -421,7 +424,7 @@ Fix a test point $x\sim \rho$, drawn independently of the training set $\Dcal$ (
 \]
 i.e.\ the function you would get by retraining on infinitely many independent datasets and averaging the resulting predictions pointwise.
 
-Adding and subtracting $\bar f(x)$ inside the squared test error and taking $\mathbb{E}_\Dcal$, the cross term vanishes exactly---by definition $\bar f$ \emph{is} the $\Dcal$-average of $\hat f$, so no approximation is involved. Averaging that pointwise split over $x\sim \rho$ and adding back the irreducible label noise $\sigma^2$ (independent of both $x$ and $\Dcal$) then gives an exact decomposition of the test risk:
+Adding and subtracting $\bar f(x)$ inside the squared test error and taking $\mathbb{E}_\Dcal$, the cross term vanishes exactly. Averaging that pointwise split over $x\sim \rho$ and adding back the irreducible label noise $\sigma^2$ (independent of both $x$ and $\Dcal$) then gives an exact decomposition of the test risk:
 \begin{equation}
 \mathcal{E}(f) \;\equiv\; \mathbb{E}_{\Dcal}\Big[\mathbb{E}_{x\sim \rho}\big[(f(x)-\hat f(x))^2\big]\Big] + \sigma^2
 \;=\; \underbrace{\|f - \bar f\|^2 + \sigma^2}_{\text{bias } B(f)} \;+\; \underbrace{\mathbb{E}_{\Dcal}\big[\|\hat f - \bar f\|^2\big]}_{\text{variance } V(f)},
@@ -450,29 +453,475 @@ determine how easy or hard it is to learn a particular target function.
 We'll also learn about once mysterious deep learning phenomena such as double descent
 and benign overfitting.
 
-\subsection{Eigenlearning}
+\subsection{The crux of eigenlearning}
 
-In general, the connection between performance on the training set and performance on the entire data distribution (i.e., performance on a test set in practice) is, mathematically speaking, highly nontrivial. Kernel regression is a special case. In the case of kernel regression, the insight comes from math; specifically, Mercer's theorem. It provides a mathematical link between the finite spectral decomposition of the empirical NTK ($K^{(0)}$) and the infinite-dimensional, functional decomposition of the analytical NTK ($K$). This connection allows us to reason about generalization performance using performance during training. Another way to think about this is that kernel regression has an obvious, mathematically tractable inductive bias.
+In general, the connection between performance on the training set and performance on the entire data distribution (i.e., performance on a test set in practice) is, mathematically speaking, highly nontrivial. Kernel regression is a special case. In the case of kernel regression, the insight comes from math; specifically, Mercer's theorem. It provides a mathematical link between the finite, training-set-dependent empirical NTK ($K^{(0)}$) and the infinite-dimensional, functional decomposition of the analytical NTK ($K$). This connection allows us to reason about generalization performance using performance during training. Another way to think about this is that kernel regression has an obvious, mathematically tractable inductive bias.
 
-\textcolor{blue}{THOUGHT.} the utility of having a frozen kernel comes from the fact that
-the kernel is determined at init. this allows us to use RMT/stat-mechy arguments to think
-about model predictions and generalization.
+Because we have to deal with functions (i.e., infinite-dimensional vectors) in addition to finite-dimensional vectors, we will have to rely on some tools of functional analysis. That being said, we will not---and need not---dwell on the mathematical intricacies. For the most part, finite-dimensional linear algebraic intuition will suffice for our purposes.
+
+Suppose we sample $N$ points $\{x_1,\cdots,x_N\}$ from our data distribution $\rho$. We can then create a $N$-dimensional vector $\hat{f}_N$ where the $i$th element is ${\hat{f}}^{(\infty)}(x_i)$. We can think of $\hat{f}_N$ as a finite shadow of the function $\hat{f}$. Doing the same for the target function $f^*(x)$, we get another $N$-dimensional vector $f^*_N$. With these finite vectors, we can compute inner products:
+
+\begin{align}
+\frac{1}{N}\langle f^*_N,\hat{f}_N \rangle = \frac{1}{N}\sum^N_{i=1}{f^*}^{(\infty)}(x_i){\hat{f}}^{(\infty)}(x_i)
+\end{align}
+
+where the normalization factor $\frac{1}{N}$ prevents the expression from blowing up as $N$ gets large. By the law of large numbers, as $N\to\infty$, this expression converges to a fixed quantity: the inner product between the functions $f^*$ and $\hat{f}$.
+
+\begin{align}
+\lim_{N\to\infty} \frac{1}{N}\sum^N_{i=1}{f^*}^{(\infty)}(x_i){\hat{f}}^{(\infty)}(x_i) = \mathbb{E}_{x\sim \rho} [f^*(x)\hat{f}(x)] =: \langle f^*, \hat{f} \rangle.
+\end{align}
+
+This is how we quantify the "similarity" between functions, and it will serve a pivotal role in our study of kernel regression.
+
+As mentioned in the introduction to the subsection, Mercer's theorem is the mathematical bridge between the empirical and analytical NTK that allows us to reason about test set performance using training set performance. The theorem gives the following functional spectral decomposition of the analytical kernel:
+
+\begin{align}
+K(x,x') = \sum^{\infty}_{i=1} \lambda_i \phi_i(x) \phi_i(x')
+\end{align}
+
+where the $\phi_i$'s are called \textit{eigenfunctions} and the $\lambda_i$s are eigenvalues. The eigenfunctions $\phi_i$ are orthonormal: $\langle \phi_i,\phi_j \rangle=\delta_{ij}$.
+Analogous to the target SVD basis in chapter 2, the eigenbasis of the analytical kernel is the natural basis to work in to capture generalization in kernel regression. They are entirely deterministic functions, independent of any stochasticity in the sampling of the training data or in the initialization of the weights. We can decompose both $\hat{f}$ and $f^*$ in terms of the eigenbasis:
+
+\begin{align}
+\hat{f}(x)=\sum^\infty_{i=1} \hat{v}_i \phi_i(x), \quad {f}^*(x)=\sum^\infty_{i=1} {v}^*_i \phi_i(x)
+\end{align}
+
+where $\hat{f}(x)$ indicates the model at the end of training (see Equation~\eqref{ch3-kernel-regression}). Recall that we know exactly what $\hat{f}(x)$ is going to look like as a result of training since its NTK is frozen. Thus, we need not think about how $\hat{f}(x)$ changes throughout training since we know exactly what it's going to become. Framed this way, it's clear that the learning problem is to get the empirical coefficients $\hat{v}_i$ to well-approximate the analytical coeffcients ${v}^*_i$. 
+
+%The difficulty in analyzing this problem is in the stochasticity of the empirical coefficients $\hat{v}_i$. In particular,there's randomness from the random sampling of the traning data $\mathcal{D}$ from the data distribution $\rho$. The latter is a factor that contributes to the generalization capabilites of the model; if the predictor $\hat{f}$ varies wildly across training sets it clearly cannot generalize well outside its training data. This is the "variance" part in bias-variance.%   
+
+Recall that the empirical kernel is a random, finite sample of the analytical kernel:
+
+\begin{align}
+K^{(0)}_{ij} = K(x_i,x_j) = \sum^{\infty}_{i=1} \lambda_i \phi_i(x_i) \phi_i(x_j).
+\end{align}
+
+This means that the "right" way to decompose $K^{(0)}$ is as follows:
+
+\begin{align}
+K^{(0)} &= \Phi^\top \Lambda\Phi
+\\&= 
+\underbrace{
+\begin{bmatrix}
+\text{--- } \boldsymbol\phi(x_1)^\top \text{ ---} \\
+\text{--- } \boldsymbol\phi(x_2)^\top \text{ ---} \\
+\vdots \\
+\text{--- } \boldsymbol\phi(x_n)^\top \text{ ---}
+\end{bmatrix}
+}_{\Phi^\top,\ n\times\infty}
+\underbrace{
+\begin{bmatrix}
+\lambda_1 & & & \\
+& \lambda_2 & & \\
+& & \lambda_3 & \\
+& & & \ddots
+\end{bmatrix}
+}_{\Lambda,\ \infty\times\infty}
+\underbrace{
+\begin{bmatrix}
+| & | & & | \\
+\boldsymbol\phi(x_1) & \boldsymbol\phi(x_2) & \cdots & \boldsymbol\phi(x_n) \\
+| & | & & |
+\end{bmatrix}
+}_{\Phi,\ \infty\times n}.
+\end{align}
+
+However, since dealing with infinite-dimensional matrices and vectors introduces many subtle mathematical considerations, we will truncate the eigenmodes at some large but finite number $M$:
+
+\begin{align}
+K^{(0)}_{ij} \approx \sum^{M}_{i=1} \lambda_i \phi_i(x_i) \phi_i(x_j) = \underbrace{\tilde{\Phi}^\top}_{n\times M} \underbrace{\tilde{\Lambda}}_{M\times M}\underbrace{\tilde{\Phi}}_{M\times n}.
+\end{align}
+
+So long as $M$ is sufficiently large, we don't lose anything in discarding the exceedingly small eigenvalue tail. As always, this claim will be validated by the predictions it enables and their match to empirics.
 
 Consider an arbitrary data point $x\sim \rho$ drawn from the data distribution.
-We worked out the evolution of the prediction $\hat{f}(x)$ throughout training in Section~\ref{nn-lr} (Equation~\eqref{ch3-kernel-regression}):
+We worked out the prediction $\hat{f}(x)$ that results from training in Section~\ref{nn-lr} (Equation~\eqref{ch3-kernel-regression-clean}) (assuming initialization at zero for a cleaner expression):
 
 \begin{align}
-\dot{\hat{f}}^{(t)}(x) = \frac{\partial \hat{f}^{(t)}(x_0)}{\partial \theta}\dot{\theta} 
-&= - \underbrace{\frac{\partial \hat{f}^{(t)}(x_0)}{\partial \theta} {J^{(t)}}^\top}_{=: k^\top(x)} \nabla_{\hat{f}(X)}\mathcal{L}\left(\hat{f}^{(t)}(X)\right) \\
-&=\hat{f}^{(0)}(x)+ k^\top(x)(K^{(0)})^{-1}(y-\hat{f}^{(0)}(X)).
+    {\hat{f}}(x) =  k^\top(x)(K^{(0)})^{-1}y.
 \end{align}
 
-We'll assume initialization at zero ($\hat{f}^{(0)}(x)=0$) for a cleaner expression:
+Since the eigenfunctions are orthonormal (we assume distinct eigenvalues),
 
 \begin{align}
-    \dot{\hat{f}}^{(t)}(x) =  k^\top(x)(K^{(0)})^{-1}y.
+\hat{v}_i &= \langle \phi_i,\hat{f} \rangle = \mathbb{E}_{x\sim\rho}\left[\phi_i(x)k^\top(x)(K^{(0)})^{-1} \Phi^\top v^* \right]
+= \lambda_i \Phi^\top_i (\Phi^\top \Lambda \Phi)^{-1} \Phi^\top v^*\\
+\hat{v} &= 
+\begin{bmatrix}
+\hat{v}_1 \\
+\vdots \\
+\hat{v}_M
+\end{bmatrix} = \Lambda \Phi (\Phi^\top \Lambda \Phi)^{-1} \Phi^\top 
+\begin{bmatrix}
+v^*_1 \\
+\vdots \\
+v^*_M
+\end{bmatrix}
+=: T^{(D)}v^*.
 \end{align}
+
+where $\Phi^\top_i$ is the $i$th row of $\Phi$. Let us examine this newly defined matrix $T^{(D)}$, hereon referred to as the \textit{learning transfer matrix}. *TOUCH UP* it's an orthogonal projection matrix (symmetric+idempotent) w.r.t. the RKHS norm ($T^{(D)}=\Lambda^{1/2}\Psi(\Psi^\top\Psi)^{-1}\Psi^\top\Lambda^{-1/2}$ for $\Psi=\Lambda^{1/2}\Phi$) and thus has trace n.
+
+The crux of eigenlearning is that the matrix $T^{(D)}$ is, in expectation with respect to random draws of $\mathcal{D}$, incredibly simple: it's diagonal with the $i$th diagonal element equaling $\frac{\lambda_i}{\lambda_i+\kappa}=: l_i$ where $\kappa$ satisfies:
+
+\begin{align}
+n=\sum^{\infty}_{i=1} \frac{\lambda_i}{\lambda_i+\kappa} \quad\left(=\text{tr}(\mathbb{E}_{\mathcal{D}}[T^{(D)}])\right)
+\end{align}
+
+($\lambda_i$'s are the eigenvalues of the analytical kernel $K$). Determining that $T^{(D)}$ is diagonal requires some fairly involved matrix algebra. And showing that the values on the diagonal concentrate into the simple form of $\frac{\lambda_i}{\lambda_i+\kappa}$ requires even more involved random matrix theory. However, the core idea being leveraged is simple; it's an assumption about what the projection matrix $\Phi$ looks like. Specifically, the assumption is \textit{Gaussian universality}: $\Phi_{ij}\sim\mathcal{N}(0,1)$. Of course, the actual distribution of $\Phi$ is highly structured, reflecting the eigenstructure of the kernel. The Gaussian universality assumption can be thought of as an active disregard of this fact. There exists some mathematically complex random matrix theory intuition for why this assumption should be true, but this is well beyond the scope of this course. For our purposes, like any assumption in learning mechanics, Gaussian universality is ultimately justified by the close match between the theory it generates and experiments.
+
+The quantity $l_i=\frac{\lambda_i}{\lambda_i+\kappa}$ is the expected \textit{learnability} of the $i$th eigenmode of the kernel and it equals $\mathbb{E}_{\mathcal{D}}\left[\langle \phi_i,\hat{f} \rangle\right]$. In general, for any function $f$ of unit norm ($\|f\| = \sqrt{\langle f, f\rangle}=1$), its inner product with $\hat{f}$, $\langle f,\hat{f} \rangle=:l^{(D)}_i$ is its $\mathcal{D}$-learnability. The learnability of a function $f$ is a quantity between 0 and 1 that dictates how well our predictor $\hat{f}$ will learn it.
+
+Concretely, the fact that $T^{(D)}$ is, in expectation, diagonal with the $i$th diagonal element equaling $\frac{\lambda_i}{\lambda_i+\kappa}$ means that 
+
+\begin{align}
+\label{ch3-vhat}
+\mathbb{E}_{\mathcal{D}} [T^{(D)}_{ij}] = \frac{\lambda_i}{\lambda_i+\kappa}\delta_{ij}\implies \mathbb{E}_{\mathcal{D}} [\hat{v}_i] = \frac{\lambda_i}{\lambda_i+\kappa} v^*_i.
+\end{align}
+
+\subsection{An equation for generalization}
+
+Recall our expression for the test loss:
+
+\begin{align}
+\label{ch3-test-loss}
+\mathcal{E}(f^*) \;\equiv\; \mathbb{E}_{\Dcal}\Big[\mathbb{E}_{x\sim \rho}\big[(f^*(x)-\hat f(x))^2\big]\Big] + \sigma^2.
+\end{align}
+
+Dealing with the irreducible noise term $\sigma^2$ above requires more care than one might expect since the predictor $\hat{f}$ has a subtle dependence on the noise that was part of the training data $\mathcal{D}$. Intuitively, we will think about the noise as being an \textit{unlearnable} part of the target function $f^*$. We'll see mathematically what this means later. For now, what matters is that we can disregard the $\sigma^2$ term and think of it as being embedded somehow in the $\mathbb{E}_{\Dcal}\Big[\mathbb{E}_{x\sim \rho}\big[(f^*(x)-\hat f(x))^2\big]\Big]$ term.
+
+By orthonormality of the eigenfunctions, we can rewrite Equation~\eqref{ch3-test-loss} in terms of the empirical and analytical coefficients $\hat{v}_i$ and $v^*_i$:
+
+\begin{align}
+\mathcal{E}(f^*) = \mathbb{E}_{\mathcal{D}}\left[\sum_i (v^*_i-\hat{v}_i)^2 \right].
+\end{align}
+
+Propagating the expectation and using the fact that $\hat{v}=T^{(D)}v^*$,
+
+\begin{align}
+    \mathcal{E}(f^*) &= \mathbb{E}_{\mathcal{D}}\left[\sum_i (v^*_i-\hat{v}_i)^2\right] \\
+    &= \mathbb{E} \left[{v^*}^{\top}(I-T^{(D)})^2v^* \right] \\
+    &= {v^*}^{\top}\left(\mathbb{E}_{\mathcal{D}}\left[{T^{(D)}}^2\right]-2\text{diag}(l_i)+I\right)v^*.
+\end{align}
+
+The tricky term above is $\mathbb{E}_{\mathcal{D}}\left[{T^{(D)}}^2\right]$. Computing it requires a decent amount of matrix algebra and random matrix theory that we will not go over. The relevant result is:
+
+\begin{align}
+    \mathbb{E}_{\mathcal{D}}\left[T^{(D)}_{ij}T^{(D)}_{ik} \right]=\frac{l^2_i(1-l_j)^2}{n-\sum_m l^2_m}\delta_{jk}+l^2_i \delta_{ij}\delta{ik}.
+\end{align}
+
+Plugging this in and simplifying, the $j,k$ sums collapse. Writing
+$X \equiv \sum_i (1-l_i)^2 {v^*_i}^2$, the $\delta_{ij}\delta_{ik}$ term contributes
+$X$ and the $\delta_{jk}$ term contributes $\big(\sum_m l_m^2\big)X/\big(n-\sum_m l_m^2\big)$,
+so that
+
+\begin{align}
+    \mathbb{E}_{\mathcal{D}}\left[\sum_i (v^*_i-\hat{v}_i)^2\right]
+    = \left[1+\frac{\sum_m l^2_m}{n-\sum_m l^2_m}\right] X
+    = \underbrace{\frac{n}{n-\sum_m l^2_m}}_{\textstyle \equiv\, \mathcal{E}_0} \sum_i (1-l_i)^2 {v^*_i}^2 .
+\end{align}
+
+\subsubsection{Absorbing the label noise into the target}
+
+It remains to deal with the irreducible noise in the test loss. Naively one might simply
+add it back on at the end, but this would be wrong: the noise does not only
+appear at test time, it is also present in the training labels
+$y_i = f^*(x_i)+\varepsilon_i$, and $\hat f$ is a linear function of $y$. The estimator
+therefore fits some of the training noise, and that fitted noise shows up in
+the test error as well.
+
+The clean way to handle both effects at once is to note that the noise enters
+the problem in exactly the same way a target function component would, and to
+treat it as such. Formally, augment the eigenbasis with a set of $M'$ additional
+orthonormal functions $\{\chi_a\}$ with eigenvalues $\lambda_{\chi}=0$, and write
+the noise as a target component supported on them,
+
+\begin{align}
+    f^*_{\text{aug}}(x) = \sum_i v^*_i \phi_i(x) + \sum_{a=1}^{M'} u_a \chi_a(x),
+    \qquad \sum_{a} u_a^2 = \sigma^2 .
+\end{align}
+
+Three facts make this substitution legitimate:
+
+\begin{enumerate}
+\item \textbf{It reproduces the correct label statistics.} The $\varepsilon_i$ are i.i.d.,
+mean zero, with variance $\sigma^2$, and are uncorrelated with $x$. A target
+component spread across directions the kernel cannot resolve has exactly these
+properties as seen by the estimator: it contributes $\sigma^2$ of label variance,
+uncorrelated with anything in the kernel's span.
+
+\item \textbf{The energy is basis-independent.} White noise has no preferred basis,
+so its total power $\sigma^2$ is the same however it is decomposed.
+Taking $M'\to\infty$, each individual $u_a^2\to 0$ while $\sum_a u_a^2 = \sigma^2$
+is exactly preserved. Nothing is created or destroyed by the change of description.
+
+\item \textbf{Zero eigenvalue is the right assignment.} From $l = \lambda/(\lambda+\kappa)$,
+$\lambda_\chi = 0$ gives $l_\chi = 0$, i.e.\ $\mathbb{E}[\hat u_a]=l_\chi u_a = 0$:
+the estimator has no systematic component along these directions, matching the fact
+that zero-mean noise cannot bias the predictor. Note also that adding modes with
+$\lambda=0$ leaves Eq.~(6) untouched, so $\kappa$, and hence every $l_i$, is unchanged.
+\end{enumerate}
+
+With this substitution the noise is no longer a separate object: it is simply part
+of the target, and the result derived above applies verbatim. Since $l_\chi=0$
+implies $(1-l_\chi)^2=1$, the noise directions enter the sum undiscounted:
+
+\begin{align}
+    \sum_i (1-l_i)^2{v^*_i}^2 \;\longrightarrow\;
+    \sum_i (1-l_i)^2 {v^*_i}^2 + \sum_a \underbrace{(1-l_\chi)^2}_{=\,1} u_a^2
+    = \sum_i (1-l_i)^2{v^*_i}^2 + \sigma^2,
+\end{align}
+
+and likewise $\sum_m l^2_m$ is unchanged, since $l_\chi^2=0$. Hence $\mathcal{E}_0$
+is unchanged, and
+
+\begin{align}
+    \boxed{\;\mathcal{E}(f^*) = \mathcal{E}_0\left(\sum_i (1-l_i)^2{v^*_i}^2 + \sigma^2\right),
+    \qquad \mathcal{E}_0 = \frac{n}{n-\sum_m l^2_m}\;}
+\end{align}
+
+\subsection*{Why $\sigma^2 \to \mathcal{E}_0\sigma^2$ is not double counting}
+
+The appearance of $\mathcal{E}_0$ multiplying $\sigma^2$ deserves comment, since
+$\sigma^2$ is often described as an ``irreducible'' noise floor and it is not obvious
+why an irreducible quantity should be amplified. It is not: the product is the sum
+of two distinct contributions,
+
+\begin{align}
+    \mathcal{E}_0\sigma^2 = \underbrace{1\cdot\sigma^2}_{\text{test-label noise}}
+    \;+\; \underbrace{(\mathcal{E}_0-1)\,\sigma^2}_{\text{fitted training noise}} .
+\end{align}
+
+The first term is the genuinely irreducible piece: even a perfect predictor
+$\hat f = f^*$ is scored against noisy test labels and incurs $\sigma^2$. It enters
+with coefficient exactly one. The second term is variance, and is the price of
+having fit $n$ noisy training labels: it is the noise contribution to
+$\mathcal{V}(f^*)=(\mathcal{E}_0-1)\mathcal{B}(f^*)$. In the ridgeless,
+well-specified limit $\mathcal{E}_0\to 1$ the second term vanishes and only the
+true floor survives, as it must.
+
+It is worth being precise about the mechanism behind the second term, since
+$l_\chi = 0$ might suggest the estimator ignores the noise directions entirely.
+What $l_\chi=0$ states is that $\mathbb{E}_{\mathcal{D}}[\hat u_a]=0$: averaged over
+draws of $\mathcal{D}$, the predictor has no component along $\chi_a$. It does not
+state that $\hat u_a = 0$ for any particular $\mathcal{D}$. The off-diagonal entries
+of $T^{(\mathcal{D})}$ have vanishing mean but non-vanishing covariance, which is
+precisely the content of the $\delta_{jk}$ term in Eq.~(86); on any given training
+set the fit absorbs a nonzero sliver of the noise, and these slivers do not cancel
+within a single draw. Their aggregate is exactly $(\mathcal{E}_0-1)\sigma^2$.
+
+Finally, note that $\mathcal{E}_0$ is not itself a noise-induced quantity. Setting
+$\sigma^2=0$ leaves $\mathcal{E}(f^*)=\mathcal{E}_0\sum_i(1-l_i)^2{v^*_i}^2$ with
+$\mathcal{E}_0>1$ in general: the overfitting coefficient is a statement about
+finite-sample fluctuations of the estimator, and applies identically to signal and
+noise. The noise-as-target construction explains why $\sigma^2$ sits \emph{inside}
+the bracket; the factor multiplying that bracket was already there.
+
+
+\subsection{Double descent and benign overfitting}
+
+We now have everything we need to explain two phenomena that, for a while, looked
+like genuine paradoxes: \textit{double descent} (test error that gets worse, then
+better, as we add data or capacity) and \textit{benign overfitting} (a model that
+interpolates noisy training labels exactly and yet generalizes fine). The
+eigenlearning equations say that both live in a single scalar,
+
+\begin{align}
+    \mathcal{E}_0 = \frac{n}{n-\sum_m l^2_m},
+\end{align}
+
+and in particular in how close the sum $\sum_m l^2_m$ gets to $n$. Our whole job in
+this subsection is to understand what makes that happen.
+
+\subsubsection*{The learnability budget}
+
+Start with the equation that defines $\kappa$:
+
+\begin{align}
+\label{ch3-budget}
+    \sum_m l_m = \sum_m \frac{\lambda_m}{\lambda_m + \kappa} = n .
+\end{align}
+
+This is worth staring at. The total learnability summed over all eigenmodes is
+\emph{exactly} $n$, no matter what the kernel is. Each training point buys one unit
+of learnability, and $\kappa$ is the price that adjusts so that the books balance.
+Think of $\kappa$ as a water level: modes with $\lambda_m \gg \kappa$ stick out above
+the water and are essentially fully learned ($l_m \approx 1$), modes with
+$\lambda_m \ll \kappa$ are submerged and essentially unlearned ($l_m \approx 0$), and
+modes with $\lambda_m \sim \kappa$ are partially learned. Adding data lowers the water
+level, exposing more modes.
+
+The kernel does not get to choose how much learnability it has; it only gets to
+choose \emph{how to spread it}. And $\sum_m l_m^2$ is precisely a measure of how
+concentrated that spreading is. Since every $l_m \in [0,1]$ we have $l_m^2 \le l_m$,
+so
+
+\begin{align}
+    \sum_m l^2_m \;\le\; \sum_m l_m \;=\; n,
+\end{align}
+
+with equality exactly when every $l_m$ is either $0$ or $1$. So $\mathcal{E}_0$ blows up
+precisely in the all-or-nothing case: when the training set is spent on $n$ modes that
+are each learned completely, and nothing is left over.
+
+It is worth making this quantitative. Define the \textit{participation ratio}
+
+\begin{align}
+    n_{\text{eff}} \;\equiv\; \frac{\left(\sum_m l_m\right)^2}{\sum_m l^2_m} = \frac{n^2}{\sum_m l^2_m},
+\end{align}
+
+the standard way of asking ``how many modes is this fit actually spread over?''\footnote{
+    If $k$ modes have $l_m=1$ and the rest have $l_m=0$, then $n_{\text{eff}}=k$. If the
+    learnability is spread evenly and thinly over $k$ modes, $n_{\text{eff}}=k$ again.
+    In both cases it counts the modes the fit is genuinely using.
+}
+Substituting, the overfitting coefficient becomes
+
+\begin{align}
+\label{ch3-e0-neff}
+    \boxed{\;\mathcal{E}_0 = \frac{n_{\text{eff}}}{n_{\text{eff}}-n},\qquad
+    \mathcal{E}_0 - 1 = \frac{n}{n_{\text{eff}}-n}.\;}
+\end{align}
+
+This is the mechanistic statement we were after, and it should look extremely familiar.
+It is the classical variance-inflation factor of a linear regression with
+$n_{\text{eff}}$ parameters fit to $n$ data points. The kernel's eigenspectrum, together
+with the amount of data, determines an \textit{effective number of parameters}
+$n_{\text{eff}}$, and everything hinges on the slack $n_{\text{eff}} - n$:
+
+\begin{itemize}
+    \item $n_{\text{eff}} \gg n$: lots of slack. The fit is spread across far more
+    directions than there are constraints, so each direction only has to absorb a
+    sliver of the training noise. $\mathcal{E}_0 \approx 1$, and almost none of the
+    fitted noise makes it into the test error.
+    \item $n_{\text{eff}} \to n$: no slack. There are exactly as many usable directions
+    as there are training points, so the fit is fully pinned down by the data, noise
+    and all, with no freedom left to hedge. $\mathcal{E}_0 \to \infty$.
+\end{itemize}
+
+The $n_{\text{eff}}=n$ point is the \textit{interpolation threshold}, and it is the
+peak of the double descent curve.
+
+\subsubsection*{Double descent: a spectrum with a cliff}
+
+To see the peak explicitly, take the simplest possible spectrum: $M$ eigenmodes with
+equal eigenvalue $\lambda$, and nothing else ($\lambda_m = 0$ for $m > M$). This is a
+kernel with a hard cliff in its spectrum. By symmetry every $l_m$ is equal, and
+Equation~\eqref{ch3-budget} gives $M\,l = n$, so $l = n/M$ for each of the $M$ modes.
+Then $\sum_m l^2_m = n^2/M$, i.e. $n_{\text{eff}} = M$ --- the effective parameter count
+is just the number of modes, as it should be --- and
+
+\begin{align}
+    \mathcal{E}_0 = \frac{M}{M-n}.
+\end{align}
+
+Feeding this into the eigenlearning equations, the test error for a target supported on
+these modes is
+
+\begin{align}
+    \mathcal{E}(f^*) = \frac{M}{M-n}\left[\left(1-\frac{n}{M}\right)^2 \|f^*\|^2 + \sigma^2\right]
+    = \underbrace{\left(1-\frac{n}{M}\right)\|f^*\|^2}_{\text{signal}} \;+\; \underbrace{\frac{M}{M-n}\,\sigma^2}_{\text{noise}} .
+\end{align}
+
+The two terms behave completely differently. The signal term decreases smoothly and
+monotonically to zero as $n \to M$: more data always means more of the target is
+learned, and the bias never misbehaves. The noise term \emph{diverges} at $n=M$. The
+familiar U-then-descent shape is a race between these two, and the peak is entirely a
+noise-amplification effect: at $n=M$ we are asking $M$ degrees of freedom to fit $M$
+noisy labels exactly, and the unique solution is forced to contort itself through every
+one of them.\footnote{
+    Past the threshold ($n > M$) the model can no longer interpolate, the ridgeless
+    limit $\kappa \to 0$ is no longer consistent with Equation~\eqref{ch3-budget}, and the
+    problem becomes an ordinary overdetermined least-squares fit which \emph{averages}
+    the noise rather than chasing it. The error then falls again --- the second descent.
+    Ordinary double descent as usually plotted varies model capacity at fixed $n$;
+    here we varied $n$ at fixed capacity $M$. It is the same peak, approached from the
+    other axis, because only the ratio $n/n_{\text{eff}}$ matters.
+}
+
+The lesson generalizes past this toy example. Anything that makes the learnabilities
+\textit{near-binary} pushes $\sum_m l_m^2$ toward $n$ and drives $\mathcal{E}_0$ up:
+a sharp cliff in the eigenspectrum, a large gap between eigenvalue scales with $\kappa$
+sitting in the gap, or more generally any spectrum for which the water level $\kappa$
+lands in a region with no modes near it. Double descent is not a mysterious property of
+neural networks; it is what happens when a spectrum has a cliff and your dataset size
+walks off it.
+
+\subsubsection*{Benign overfitting: the tail provides the slack}
+
+Now modify the example. Keep the $M$ ``head'' modes with eigenvalue $\lambda$, but add a
+long tail: a very large number of additional modes with tiny eigenvalues $\varepsilon
+\ll \lambda$. Real kernels --- the NTKs of actual architectures very much included ---
+look like this. Their spectra decay, often as a power law, but they do not stop.
+
+Set $n = M$, exactly where the cliff-only kernel exploded. Because there are so many
+tail modes, the tail can supply a nonzero total learnability
+
+\begin{align}
+    q \;\equiv\; \sum_{m \in \text{tail}} l_m \;>\;0
+\end{align}
+
+even though each individual $l_m$ in the tail is minuscule. The budget then leaves only
+$n - q$ for the head, so each head mode gets $l_{\text{head}} = (n-q)/M = 1 - q/M$ rather
+than the full $1$. Now compute the dangerous sum. The head contributes
+$M(1-q/M)^2 \approx M - 2q$, and the tail contributes essentially nothing, since squaring
+a large number of tiny learnabilities annihilates them ($\sum_{\text{tail}} l_m^2 \ll
+\sum_{\text{tail}} l_m = q$). So
+
+\begin{align}
+    \sum_m l^2_m \approx n - 2q
+    \qquad\Longrightarrow\qquad
+    n_{\text{eff}} \approx n + 2q
+    \qquad\Longrightarrow\qquad
+    \mathcal{E}_0 \approx \frac{n}{2q} .
+\end{align}
+
+The divergence is gone. A tail that is individually negligible --- modes so small that
+they contribute nothing to fitting the target and are invisible in the bias term --- has
+collectively bought $2q$ units of slack in $n_{\text{eff}}$, and that slack is exactly
+what caps the peak. This is the mechanism of benign overfitting. The model still
+interpolates the training data, noise included. But the fitted noise gets dumped into a
+huge number of low-eigenvalue directions, each absorbing a sliver, and because those
+directions carry almost no weight in the kernel they are almost invisible on the test
+distribution. Overfitting still happens; it is just harmless, in exactly the sense that
+$(\mathcal{E}_0-1)\sigma^2$ is small.
+
+This also tells us when overfitting stops being benign: when the tail is too short or
+decays too fast to supply meaningful slack ($q \to 0$), or when the water level $\kappa$
+sits in a spectral gap so that the modes are cleanly sorted into learned and unlearned
+with nothing in between.
+
+\subsubsection*{One knob, two phenomena}
+
+It is worth stating plainly what we have found, because the usual presentations of these
+two phenomena make them sound unrelated:
+
+\begin{center}
+\begin{tabular}{ll}
+\textbf{Double descent} & $\sum_m l^2_m \to n$, i.e.\ $n_{\text{eff}} \to n$: no slack, $\mathcal{E}_0$ blows up. \\
+\textbf{Benign overfitting} & $\sum_m l^2_m \ll n$, i.e.\ $n_{\text{eff}} \gg n$: lots of slack, $\mathcal{E}_0 \approx 1$. \\
+\end{tabular}
+\end{center}
+
+They are the two ends of a single knob, and the knob is the interaction between the
+kernel's eigenspectrum and the dataset size. Neither is a statement about
+depth, nonlinearity, or anything specific to neural networks --- they are properties of
+a spectrum and a value of $n$. What the NTK buys us is the right to say that a wide
+network in the lazy regime \emph{has} such a spectrum, fixed at initialization by the
+architecture, which is why an architecture's inductive bias and its overfitting behavior
+turn out to be the same question.
+
+Note also that this resolves the puzzle we flagged back in the bias-variance discussion.
+Nothing here contradicts the decomposition $\mathcal{E} = B + V$; the bias term is
+perfectly well-behaved and monotone in the example above. What breaks is only the
+classical assumption that variance rises monotonically with capacity. Variance is
+$\frac{\mathcal{E}_0-1}{\mathcal{E}_0}\mathcal{E}$, and $\mathcal{E}_0$ is controlled by
+$n_{\text{eff}} - n$, which is not monotone in anything in particular. It can shrink to
+zero at a spectral cliff and grow again once the tail is reached.
+
 
 \section{Why lazy learning is bad}
+
+At a high level, lazy learning is bad because learning is movement and networks undergoing lazy learning barely move in parameter space. 
 
 

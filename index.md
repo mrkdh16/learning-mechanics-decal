@@ -83,6 +83,7 @@ All [lecture notes](course-notes.html) and [homework](problem-sets.html) are als
         </p>
         <div class="cal-week__resources">
           <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/1312.6120">Reading: Saxe et al. (2014)</a>
+          <a class="cal-week__tag cal-week__tag--reading-q" href="https://docs.google.com/forms/d/e/1FAIpQLSc5nCrQzh4spVE3kNTuJ72P-aW2D6Un4TbgydmhCxD6vH3WQA/viewform?usp=publish-editor" target="_blank">Reading Questions</a>
           <a class="cal-week__tag cal-week__tag--notes" href="lecture-notes/ch2.pdf">Lecture Notes</a>
         </div>
       </div>

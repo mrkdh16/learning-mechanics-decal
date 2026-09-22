@@ -101,6 +101,7 @@ All [lecture notes](course-notes.html) and [homework](problem-sets.html) are als
           How can we analytically solve for the training dynamics of deep linear networks?
         </p>
         <div class="cal-week__resources">
+          <a class="cal-week__tag cal-week__tag--reading-q" href="https://docs.google.com/forms/d/e/1FAIpQLSeJPYc8oJ9ZVecc1Vv4N8pNplrswiIF-PNIQN99ki9crv4cmQ/viewform?usp=publish-editor" target="_blank">Reading Questions</a>
           <a class="cal-week__tag cal-week__tag--notes" href="lecture-notes/ch2.pdf">Lecture Notes</a>
           <a class="cal-week__tag cal-week__tag--homework" href="problem-sets/ps2.pdf">Homework</a>
         </div>

@@ -14,3 +14,4 @@ nav_order: 4
 - <a href="https://docs.google.com/forms/d/e/1FAIpQLSdxmAe4dqHV26jDM7UiSWOU30WLIsgPNhhUo5TO-vGOZiR7Fg/viewform?usp=header" target="_blank">Lecture 1: Pre-Semester Survey</a>
 - <a href="https://docs.google.com/forms/d/e/1FAIpQLSd-XSV_Wll4IonOXK-dmwT3RqUgmapmEEPuwdXb5e3GMSNL9g/viewform?usp=header" target="_blank">Lecture 2: Reading Questions</a>
 - <a href="https://docs.google.com/forms/d/e/1FAIpQLSc5nCrQzh4spVE3kNTuJ72P-aW2D6Un4TbgydmhCxD6vH3WQA/viewform?usp=publish-editor" target="_blank">Lecture 3: Reading Questions</a>
+- <a href="https://docs.google.com/forms/d/e/1FAIpQLSeJPYc8oJ9ZVecc1Vv4N8pNplrswiIF-PNIQN99ki9crv4cmQ/viewform?usp=publish-editor" target="_blank">Lecture 4: Reading Questions</a>

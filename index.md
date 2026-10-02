@@ -119,6 +119,7 @@ All [lecture notes](course-notes.html) and [homework](problem-sets.html) are als
         <p class="cal-week__question">
           Is there a limit in which neural networks become analytically solvable?
         </p>
+        <p class="cal-week__question"><em>Guest lecture — no reading questions this week.</em></p>
         <div class="cal-week__resources">
           <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/1902.06720">Reading: Lee et al. (2019)</a>
           <a class="cal-week__tag cal-week__tag--optional" href="https://arxiv.org/pdf/1806.07572">Optional Reading: Jacot et al. (2020)</a>
@@ -139,6 +140,7 @@ All [lecture notes](course-notes.html) and [homework](problem-sets.html) are als
           How can we develop a mathematical framework to study kernel regression? Can we predict how kernel regression will perform on real data?
         </p>
         <div class="cal-week__resources">
+          <a class="cal-week__tag cal-week__tag--reading-q" href="https://docs.google.com/forms/d/e/1FAIpQLSdi7MFTtNRczW7VLwtP8u2np36kBifOWlCOlvFl1AdwWf7ATQ/viewform?usp=publish-editor" target="_blank">Reading Questions</a>
           <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/2110.03922">Reading: Simon et al. (2023)</a>
           <a class="cal-week__tag cal-week__tag--reading" href="https://arxiv.org/pdf/2510.14878">Reading: Karkada et al. (2026)</a>
           <a class="cal-week__tag cal-week__tag--notes" href="lecture-notes/ch3.pdf">Lecture Notes</a>

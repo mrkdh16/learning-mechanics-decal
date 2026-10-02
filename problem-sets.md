@@ -7,7 +7,7 @@ nav_order: 4
 ## Problem Sets
 
 - <a href="problem-sets/ps1.pdf" target="_blank">Problem Set 1: Introduction to Neural Networks</a> &mdash; due 9/16
-- <a href="problem-sets/ps2.pdf" target="_blank">Problem Set 2: Toy Model I, Deep Linear Networks</a> &mdash; due 9/30
+- <a href="problem-sets/ps2.pdf" target="_blank">Problem Set 2: Toy Model I, Deep Linear Networks</a> &mdash; due 10/7
 
 ## Reading Questions
 
